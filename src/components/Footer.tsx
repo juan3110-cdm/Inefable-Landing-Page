@@ -1,4 +1,5 @@
 import { useTranslation } from '../hooks/useTranslation'
+import Logo from './ui/Logo'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -15,8 +16,8 @@ export default function Footer() {
         alignItems: 'center',
       }}
     >
-      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 16, opacity: 0.85, color: '#fff' }}>
-        Inefable
+      <span style={{ opacity: 0.85 }}>
+        <Logo size={16} />
       </span>
       <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', fontSize: 13, color: '#9a92b3' }}>
         <span>Madrid, España</span>

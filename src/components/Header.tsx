@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from '../hooks/useTranslation'
 import type { Lang } from '../i18n/translations'
+import Logo from './ui/Logo'
 
 const NAV_LINKS = [
   { key: 'services' as const, href: '#servicios' },
@@ -55,18 +56,8 @@ export default function Header() {
       </nav>
 
       {/* Logo */}
-      <a
-        href="#"
-        className="justify-self-center"
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 800,
-          fontSize: 18,
-          letterSpacing: '-0.02em',
-          color: '#fff',
-        }}
-      >
-        Inefable
+      <a href="#" className="justify-self-center">
+        <Logo size={19} />
       </a>
 
       {/* Right: lang selector + CTA */}
