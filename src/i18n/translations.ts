@@ -353,7 +353,7 @@ export const translations: Record<Lang, Translations> = {
           originalPrice: '500€',
           price: '199.79€',
           period: 'pago único',
-          note: '+ 49.79€/mes de mantenimiento · Menos del 10% del costo de un recepcionista humano',
+          note: '+ 49.79€/mes de mantenimiento · Menos del 3% del costo de un recepcionista humano',
           features: [
             'Contesta llamadas de tu negocio',
             'Disponible 24/7',
@@ -684,7 +684,7 @@ export const translations: Record<Lang, Translations> = {
           originalPrice: '€500',
           price: '€199.79',
           period: 'one-time',
-          note: '+ €49.79/mo maintenance · Less than 10% of the cost of a human receptionist',
+          note: '+ €49.79/mo maintenance · Less than 3% of the cost of a human receptionist',
           features: [
             'Answers your business calls',
             'Available 24/7',
