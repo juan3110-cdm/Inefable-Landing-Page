@@ -99,6 +99,16 @@ export interface Translations {
     sending: string
   }
   footer: { rights: string }
+  chat: {
+    title: string
+    status: string
+    placeholder: string
+    send: string
+    starters: string[]
+    openLabel: string
+    closeLabel: string
+    errorMessage: string
+  }
 }
 
 export const translations: Record<Lang, Translations> = {
@@ -267,9 +277,10 @@ export const translations: Record<Lang, Translations> = {
           key: 'ads',
           name: 'Gestión de Ads',
           desc: 'Gestión activa de tus campañas.',
-          price: '150€',
+          originalPrice: '150€',
+          price: '90€',
           period: '/mes',
-          badge: 'Más elegido',
+          badge: 'Precio de lanzamiento',
           features: ['Meta Ads + Google Ads', 'Reporte semanal', 'Optimización continua', 'Sin permanencia'],
           cta: 'Empezar con ads',
         },
@@ -278,10 +289,10 @@ export const translations: Record<Lang, Translations> = {
           name: 'Recepcionista IA',
           desc: 'Tu recepcionista, siempre disponible.',
           originalPrice: '500€',
-          price: '300€',
+          price: '200€',
           period: 'pago único',
-          note: '+ 75€/mes de mantenimiento · Menos del 10% del costo de un recepcionista humano',
-          badge: 'Ahorra vs. contratar',
+          note: '+ 50€/mes de mantenimiento · Menos del 10% del costo de un recepcionista humano',
+          badge: 'Oferta clientes fundadores',
           features: [
             'Configuración del agente',
             'Disponible 24/7',
@@ -294,9 +305,11 @@ export const translations: Record<Lang, Translations> = {
           key: 'crm',
           name: 'CRM y Automatización',
           desc: 'Tu pipeline de ventas, organizado y automático.',
-          price: '600€',
+          originalPrice: '900€',
+          price: '350€',
           period: 'pago único',
-          note: '+ 100€/mes de automatización y soporte',
+          note: '+ 60€/mes de automatización y soporte',
+          badge: 'Oferta clientes fundadores',
           features: [
             'Implantación de CRM',
             'Migración de datos existentes',
@@ -309,8 +322,10 @@ export const translations: Record<Lang, Translations> = {
           key: 'marketing',
           name: 'Marketing Automatizado',
           desc: 'Email, SMS y reputación, funcionando solos.',
-          price: '200€',
+          originalPrice: '200€',
+          price: '90€',
           period: '/mes',
+          badge: 'Oferta clientes fundadores',
           features: ['Email & SMS automatizado', 'Gestión de reputación online', 'Funnel de conversión', 'Reporte mensual'],
           cta: 'Activar mi marketing',
         },
@@ -319,9 +334,9 @@ export const translations: Record<Lang, Translations> = {
           name: 'Automatización para Restaurantes',
           desc: 'Menú QR, TPV, cocina y reservas en un solo sistema.',
           originalPrice: '1.200€',
-          price: '700€',
+          price: '400€',
           period: 'pago único',
-          note: '+ 90€/mes de mantenimiento',
+          note: '+ 50€/mes de mantenimiento',
           badge: 'Oferta clientes fundadores',
           features: [
             'Menú QR + conexión a TPV',
@@ -372,6 +387,16 @@ export const translations: Record<Lang, Translations> = {
       sending: 'Enviando…',
     },
     footer: { rights: '© 2026 Inefable. Todos los derechos reservados.' },
+    chat: {
+      title: 'Asistente Inefable',
+      status: 'En línea',
+      placeholder: 'Escribe tu mensaje...',
+      send: 'Enviar',
+      starters: ['¿Qué servicios ofrecéis?', '¿Cómo es el proceso?', 'Quiero una propuesta'],
+      openLabel: 'Abrir chat',
+      closeLabel: 'Cerrar chat',
+      errorMessage: 'Ha habido un error. Inténtalo de nuevo o escríbenos a hola@inefable.agency.',
+    },
   },
 
   en: {
@@ -532,9 +557,10 @@ export const translations: Record<Lang, Translations> = {
           key: 'ads',
           name: 'Ad Management',
           desc: 'Active management of your campaigns.',
-          price: '€150',
+          originalPrice: '€150',
+          price: '€90',
           period: '/mo',
-          badge: 'Most picked',
+          badge: 'Launch pricing',
           features: ['Meta Ads + Google Ads', 'Weekly reporting', 'Continuous optimization', 'No lock-in'],
           cta: 'Start with ads',
         },
@@ -543,10 +569,10 @@ export const translations: Record<Lang, Translations> = {
           name: 'AI Receptionist',
           desc: 'Your receptionist, always on.',
           originalPrice: '€500',
-          price: '€300',
+          price: '€200',
           period: 'one-time',
-          note: '+ €75/mo maintenance · Less than 10% of the cost of a human receptionist',
-          badge: 'Save vs. hiring',
+          note: '+ €50/mo maintenance · Less than 10% of the cost of a human receptionist',
+          badge: 'Founding customer offer',
           features: [
             'Agent setup',
             'Available 24/7',
@@ -559,9 +585,11 @@ export const translations: Record<Lang, Translations> = {
           key: 'crm',
           name: 'CRM & Automation',
           desc: 'Your sales pipeline, organized and automatic.',
-          price: '€600',
+          originalPrice: '€900',
+          price: '€350',
           period: 'one-time',
-          note: '+ €100/mo automation and support',
+          note: '+ €60/mo automation and support',
+          badge: 'Founding customer offer',
           features: [
             'CRM implementation',
             'Migration of existing data',
@@ -574,8 +602,10 @@ export const translations: Record<Lang, Translations> = {
           key: 'marketing',
           name: 'Marketing Automation',
           desc: 'Email, SMS and reputation, running on their own.',
-          price: '€200',
+          originalPrice: '€200',
+          price: '€90',
           period: '/mo',
+          badge: 'Founding customer offer',
           features: ['Automated email & SMS', 'Online reputation management', 'Conversion funnel', 'Monthly reporting'],
           cta: 'Activate my marketing',
         },
@@ -584,9 +614,9 @@ export const translations: Record<Lang, Translations> = {
           name: 'Restaurant Automation',
           desc: 'QR menu, POS, kitchen and reservations in one system.',
           originalPrice: '€1,200',
-          price: '€700',
+          price: '€400',
           period: 'one-time',
-          note: '+ €90/mo maintenance',
+          note: '+ €50/mo maintenance',
           badge: 'Founding customer offer',
           features: [
             'QR menu + POS integration',
@@ -637,5 +667,15 @@ export const translations: Record<Lang, Translations> = {
       sending: 'Sending…',
     },
     footer: { rights: '© 2026 Inefable. All rights reserved.' },
+    chat: {
+      title: 'Inefable Assistant',
+      status: 'Online',
+      placeholder: 'Type your message...',
+      send: 'Send',
+      starters: ['What services do you offer?', 'How does the process work?', 'I want a proposal'],
+      openLabel: 'Open chat',
+      closeLabel: 'Close chat',
+      errorMessage: 'Something went wrong. Please try again or email us at hola@inefable.agency.',
+    },
   },
 }

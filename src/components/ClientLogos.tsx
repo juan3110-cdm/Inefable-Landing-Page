@@ -1,6 +1,11 @@
 import { useTranslation } from '../hooks/useTranslation'
+import martiLogo from '../assets/clients/proyecto-marti.png'
+import vcrLogo from '../assets/clients/vcr.png'
 
-const CLIENTS = ['Proyecto Martí', 'VCR']
+const CLIENTS = [
+  { name: 'Proyecto Martí', src: martiLogo, shape: 'circle' as const },
+  { name: 'VCR', src: vcrLogo, shape: 'card' as const },
+]
 
 export default function ClientLogos() {
   const { t } = useTranslation()
@@ -20,35 +25,40 @@ export default function ClientLogos() {
       >
         {t.logosLabel}
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap', maxWidth: 900, margin: '0 auto' }}>
-        {CLIENTS.map((name) => (
-          <div
-            key={name}
-            style={{
-              width: 180,
-              height: 90,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'var(--color-surface)',
-              border: '1px solid var(--color-border-soft)',
-              borderRadius: 14,
-              padding: 14,
-            }}
-          >
-            <span
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 32, flexWrap: 'wrap', maxWidth: 900, margin: '0 auto' }}>
+        {CLIENTS.map((client) =>
+          client.shape === 'circle' ? (
+            <img
+              key={client.name}
+              src={client.src}
+              alt={client.name}
               style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 700,
-                fontSize: 15,
-                color: 'rgba(255,255,255,.5)',
-                textAlign: 'center',
+                width: 90,
+                height: 90,
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '1px solid var(--color-border-soft)',
+              }}
+            />
+          ) : (
+            <div
+              key={client.name}
+              style={{
+                width: 180,
+                height: 90,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#fff',
+                border: '1px solid var(--color-border-soft)',
+                borderRadius: 14,
+                padding: 16,
               }}
             >
-              {name}
-            </span>
-          </div>
-        ))}
+              <img src={client.src} alt={client.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            </div>
+          )
+        )}
       </div>
     </section>
   )

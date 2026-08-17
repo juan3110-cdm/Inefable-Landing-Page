@@ -116,6 +116,27 @@ a:hover {
   animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .chat-bubble,
+  .chat-panel,
+  .fadeup {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 1.6fr);
+  gap: 60px;
+}
+@media (max-width: 767px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
 .gradient-text {
   background: linear-gradient(90deg, #4f7bf0, #a855f7, #d78cf0);
   -webkit-background-clip: text;

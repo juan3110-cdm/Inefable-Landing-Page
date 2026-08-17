@@ -9,6 +9,7 @@ import ClientLogos from './components/ClientLogos'
 import Pricing from './components/Pricing'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ChatWidget from './components/ChatWidget'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <ChatWidget />
       </div>
     </LanguageProvider>
   )

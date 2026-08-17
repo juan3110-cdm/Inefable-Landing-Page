@@ -6,13 +6,7 @@ export default function WhyInefable() {
   return (
     <section id="porque" style={{ padding: '60px 6vw 130px', position: 'relative', zIndex: 1 }}>
       <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'minmax(260px,1fr) minmax(0,1.6fr)',
-          gap: 60,
-        }}
+        style={{ maxWidth: 1200, margin: '0 auto' }}
         className="why-grid"
       >
         <div>
