@@ -134,6 +134,11 @@ a:hover {
     opacity: 1;
   }
 }
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
 
 .flow-spin {
   animation: flowSpin 1s linear infinite;
@@ -151,10 +156,22 @@ a:hover {
   background-size: 56px 56px;
 }
 
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .flow-spin,
   .flow-pop,
-  .flow-beam {
+  .flow-beam,
+  .marquee-track {
     animation: none !important;
   }
 }
