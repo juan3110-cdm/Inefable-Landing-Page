@@ -1,4 +1,5 @@
 import { useTranslation } from '../hooks/useTranslation'
+import { firePrefill } from '../lib/prefill'
 
 export default function Hero() {
   const { t } = useTranslation()
@@ -103,7 +104,7 @@ export default function Hero() {
         >
           <a
             href="#contacto"
-            onClick={() => sessionStorage.setItem('prefill-service', 'web')}
+            onClick={() => firePrefill({ service: 'web' })}
             style={{
               background: '#fff',
               color: '#0b0b12',
@@ -118,7 +119,7 @@ export default function Hero() {
           </a>
           <a
             href="#contacto"
-            onClick={() => sessionStorage.setItem('prefill-service', 'ads')}
+            onClick={() => firePrefill({ service: 'ads' })}
             style={{
               background: 'rgba(255,255,255,.06)',
               color: '#fff',
@@ -133,7 +134,52 @@ export default function Hero() {
           </a>
           <a
             href="#contacto"
-            onClick={() => sessionStorage.setItem('prefill-service', 'ai')}
+            onClick={() => firePrefill({ service: 'crm' })}
+            style={{
+              background: 'rgba(255,255,255,.06)',
+              color: '#fff',
+              fontSize: 15,
+              fontWeight: 700,
+              padding: '14px 26px',
+              borderRadius: 100,
+              border: '1px solid rgba(255,255,255,.18)',
+            }}
+          >
+            {t.hero.ctaCrm}
+          </a>
+          <a
+            href="#contacto"
+            onClick={() => firePrefill({ service: 'marketing' })}
+            style={{
+              background: 'rgba(255,255,255,.06)',
+              color: '#fff',
+              fontSize: 15,
+              fontWeight: 700,
+              padding: '14px 26px',
+              borderRadius: 100,
+              border: '1px solid rgba(255,255,255,.18)',
+            }}
+          >
+            {t.hero.ctaMarketing}
+          </a>
+          <a
+            href="#contacto"
+            onClick={() => firePrefill({ service: 'restaurant' })}
+            style={{
+              background: 'rgba(255,255,255,.06)',
+              color: '#fff',
+              fontSize: 15,
+              fontWeight: 700,
+              padding: '14px 26px',
+              borderRadius: 100,
+              border: '1px solid rgba(255,255,255,.18)',
+            }}
+          >
+            {t.hero.ctaRestaurant}
+          </a>
+          <a
+            href="#contacto"
+            onClick={() => firePrefill({ service: 'ai' })}
             style={{
               background: '#15121e',
               border: '1px solid rgba(168,133,255,.35)',

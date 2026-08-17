@@ -7,7 +7,6 @@ import WhyInefable from './components/WhyInefable'
 import Process from './components/Process'
 import ClientLogos from './components/ClientLogos'
 import Pricing from './components/Pricing'
-import Catalog from './components/Catalog'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -24,7 +23,6 @@ function App() {
           <Process />
           <ClientLogos />
           <Pricing />
-          <Catalog />
           <Contact />
         </main>
         <Footer />

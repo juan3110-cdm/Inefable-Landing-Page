@@ -9,7 +9,6 @@ const NAV_LINKS = [
   { key: 'why' as const, href: '#porque' },
   { key: 'process' as const, href: '#proceso' },
   { key: 'pricing' as const, href: '#tarifas' },
-  { key: 'catalog' as const, href: '#catalogo' },
   { key: 'contact' as const, href: '#contacto' },
 ]
 

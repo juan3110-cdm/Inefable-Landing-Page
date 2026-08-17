@@ -5,6 +5,9 @@ const GRADIENTS: Record<string, string> = {
   web: 'linear-gradient(160deg, rgba(47,95,224,.35), rgba(47,95,224,.05))',
   ads: 'linear-gradient(160deg, rgba(168,85,247,.35), rgba(168,85,247,.05))',
   ai: 'linear-gradient(160deg, rgba(108,138,255,.35), rgba(108,138,255,.05))',
+  crm: 'linear-gradient(160deg, rgba(45,212,191,.35), rgba(45,212,191,.05))',
+  marketing: 'linear-gradient(160deg, rgba(251,146,60,.35), rgba(251,146,60,.05))',
+  restaurant: 'linear-gradient(160deg, rgba(244,63,94,.35), rgba(244,63,94,.05))',
 }
 
 function ServiceIcon({ svcKey }: { svcKey: string }) {
@@ -21,6 +24,31 @@ function ServiceIcon({ svcKey }: { svcKey: string }) {
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="m3 11 18-5v12L3 14v-3z" />
         <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+      </svg>
+    )
+  }
+  if (svcKey === 'crm') {
+    return (
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="7" cy="7" r="3" />
+        <circle cx="17" cy="17" r="3" />
+        <path d="M9.5 8.5 14.5 15.5" />
+      </svg>
+    )
+  }
+  if (svcKey === 'marketing') {
+    return (
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 11v2a2 2 0 0 0 2 2h1l2 5h2l-1.5-5H10l9 4V5l-9 4H5a2 2 0 0 0-2 2z" />
+      </svg>
+    )
+  }
+  if (svcKey === 'restaurant') {
+    return (
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 3v7a2 2 0 0 0 4 0V3" />
+        <path d="M8 10v11" />
+        <path d="M17 3c-1.5 0-2.5 1.5-2.5 3.5S16 12 17 12v9" />
       </svg>
     )
   }
