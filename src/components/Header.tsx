@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from '../hooks/useTranslation'
 import type { Lang } from '../i18n/translations'
@@ -15,11 +15,15 @@ const NAV_LINKS = [
 export default function Header() {
   const { t, lang, setLang } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const barRef = useRef<HTMLDivElement>(null)
+  const [barHeight, setBarHeight] = useState(63)
 
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768) setMenuOpen(false)
+      if (barRef.current) setBarHeight(barRef.current.offsetHeight)
     }
+    onResize()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
@@ -27,22 +31,30 @@ export default function Header() {
   const toggleLang = () => setLang(lang === 'es' ? 'en' : 'es')
 
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr',
-        alignItems: 'center',
-        gap: 8,
-        padding: '12px 6vw',
-        backdropFilter: 'blur(16px)',
-        background: 'rgba(7,7,11,.85)',
-        borderBottom: '1px solid var(--color-border-soft)',
-      }}
-    >
-      {/* Desktop nav */}
+    <>
+      <header
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          backdropFilter: 'blur(16px)',
+          background: 'rgba(7,7,11,.85)',
+          borderBottom: '1px solid var(--color-border-soft)',
+        }}
+      >
+        <div
+          ref={barRef}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr auto 1fr',
+            alignItems: 'center',
+            gap: 8,
+            padding: '12px 6vw',
+          }}
+        >
+          {/* Desktop nav */}
       <nav className="hidden md:flex items-center gap-3 flex-wrap justify-self-start">
         {NAV_LINKS.map(({ key, href }) => (
           <a
@@ -108,47 +120,49 @@ export default function Header() {
           />
         </button>
       </div>
+        </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            style={{
-              gridColumn: '1 / -1',
-              backgroundColor: 'rgba(7,7,11,.98)',
-              borderTop: '1px solid var(--color-border-soft)',
-              overflow: 'hidden',
-            }}
-          >
-            <nav className="px-2 pb-6 pt-4 flex flex-col gap-1">
-              {NAV_LINKS.map(({ key, href }) => (
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              style={{
+                backgroundColor: 'rgba(7,7,11,.98)',
+                borderTop: '1px solid var(--color-border-soft)',
+                overflow: 'hidden',
+              }}
+            >
+              <nav className="px-2 pb-6 pt-4 flex flex-col gap-1">
+                {NAV_LINKS.map(({ key, href }) => (
+                  <a
+                    key={key}
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="py-3 text-base border-b last:border-0"
+                    style={{ color: '#cfc9dd', borderColor: 'var(--color-border-soft)' }}
+                  >
+                    {t.nav[key]}
+                  </a>
+                ))}
                 <a
-                  key={key}
-                  href={href}
+                  href="#contacto"
                   onClick={() => setMenuOpen(false)}
-                  className="py-3 text-base border-b last:border-0"
-                  style={{ color: '#cfc9dd', borderColor: 'var(--color-border-soft)' }}
+                  className="mt-3 text-center text-sm font-bold px-4 py-3"
+                  style={{ background: 'var(--color-accent-gradient)', color: '#fff', borderRadius: 100 }}
                 >
-                  {t.nav[key]}
+                  {t.nav.cta}
                 </a>
-              ))}
-              <a
-                href="#contacto"
-                onClick={() => setMenuOpen(false)}
-                className="mt-3 text-center text-sm font-bold px-4 py-3"
-                style={{ background: 'var(--color-accent-gradient)', color: '#fff', borderRadius: 100 }}
-              >
-                {t.nav.cta}
-              </a>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+      <div style={{ height: barHeight }} />
+    </>
   )
 }
 

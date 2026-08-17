@@ -29,7 +29,7 @@ export default function ServiceFlow({ items = ['Marca', 'Web', 'Automatización'
   ]
 
   return (
-    <div className="min-w-[320px] overflow-x-auto rounded-3xl border border-flow-border bg-flow-surface p-6">
+    <div className="min-w-[320px] overflow-x-auto rounded-3xl border border-border bg-surface p-6">
       <svg viewBox="0 0 600 330" style={{ width: '100%', display: 'block' }}>
         {/* tarjetas */}
         {[40, 235, 430].map((x, i) => (

@@ -57,6 +57,13 @@ export interface Translations {
     aiWidget: { status: string; title: string; line: string }
   }
   scroll: { titleA: string; titleB: string }
+  growth: {
+    titleA: string
+    titleB: string
+    flowItems: [string, string, string]
+    flowTarget: string
+    stats: { value: number; suffix?: string; label: string; desc: string }[]
+  }
   services: { eyebrow: string; title: string; items: ServiceItem[] }
   why: {
     eyebrow: string
@@ -141,6 +148,17 @@ export const translations: Record<Lang, Translations> = {
       },
     },
     scroll: { titleA: 'De clics', titleB: 'a clientes.' },
+    growth: {
+      titleA: 'Web, ads e IA trabajando juntos por tu negocio',
+      titleB: 'Compromisos que sí cumplimos',
+      flowItems: ['Web', 'Ads', 'IA'],
+      flowTarget: 'Tu negocio',
+      stats: [
+        { value: 24, suffix: 'h', label: 'tiempo de respuesta', desc: 'Te contactamos en menos de 24 horas laborables.' },
+        { value: 3, label: 'rondas de ajuste', desc: 'Incluidas en cada proyecto, sin coste extra.' },
+        { value: 100, suffix: '%', label: 'remoto, cualquier país', desc: 'Trabajamos con clientes de cualquier parte del mundo, sin excepciones.' },
+      ],
+    },
     services: {
       eyebrow: 'Servicios',
       title: 'Seis formas de crecer',
@@ -333,18 +351,16 @@ export const translations: Record<Lang, Translations> = {
           key: 'restaurant',
           name: 'Automatización para Restaurantes',
           desc: 'Menú QR, TPV, cocina y reservas en un solo sistema.',
-          originalPrice: '1.200€',
-          price: '400€',
+          price: 'Desde 270€',
           period: 'pago único',
-          note: '+ 50€/mes de mantenimiento',
-          badge: 'Oferta clientes fundadores',
+          note: 'El precio final depende del tamaño y alcance del proyecto · + mantenimiento mensual',
           features: [
             'Menú QR + conexión a TPV',
             'Pedidos a cocina (KDS)',
             'Reservas por WhatsApp',
             'Delivery propio sin comisiones',
           ],
-          cta: 'Activar mi restaurante',
+          cta: 'Pedir cotización',
         },
       ],
       quote: {
@@ -428,6 +444,17 @@ export const translations: Record<Lang, Translations> = {
       },
     },
     scroll: { titleA: 'From clicks', titleB: 'to customers.' },
+    growth: {
+      titleA: 'Web, ads and AI working together for your business',
+      titleB: 'Commitments we actually keep',
+      flowItems: ['Web', 'Ads', 'AI'],
+      flowTarget: 'Your business',
+      stats: [
+        { value: 24, suffix: 'h', label: 'response time', desc: "We'll get back to you within 24 business hours." },
+        { value: 3, label: 'revision rounds', desc: 'Included in every project, at no extra cost.' },
+        { value: 100, suffix: '%', label: 'remote, any country', desc: 'We work with clients anywhere in the world, no exceptions.' },
+      ],
+    },
     services: {
       eyebrow: 'Services',
       title: 'Six ways to grow',
@@ -613,18 +640,16 @@ export const translations: Record<Lang, Translations> = {
           key: 'restaurant',
           name: 'Restaurant Automation',
           desc: 'QR menu, POS, kitchen and reservations in one system.',
-          originalPrice: '€1,200',
-          price: '€400',
+          price: 'From €270',
           period: 'one-time',
-          note: '+ €50/mo maintenance',
-          badge: 'Founding customer offer',
+          note: 'Final price depends on the size and scope of the project · plus monthly maintenance',
           features: [
             'QR menu + POS integration',
             'Kitchen display orders (KDS)',
             'WhatsApp reservations',
             'Zero-commission delivery',
           ],
-          cta: 'Activate my restaurant',
+          cta: 'Get a quote',
         },
       ],
       quote: {

@@ -44,10 +44,10 @@ export default function StatCard({ value, suffix = '', label, desc }: StatCardPr
   return (
     <div
       ref={ref}
-      className="stat-grid-bg relative overflow-hidden rounded-3xl border border-flow-border bg-flow-surface pt-11 px-6 pb-7 text-center"
+      className="stat-grid-bg relative overflow-hidden rounded-3xl border border-border bg-surface pt-8 px-6 pb-6 text-center"
     >
       <div
-        className="text-[68px] font-extrabold leading-none tracking-[-0.04em]"
+        className="text-[44px] font-extrabold leading-none tracking-[-0.03em]"
         style={{
           background: 'linear-gradient(180deg,#fff 35%,rgba(255,255,255,.35) 100%)',
           WebkitBackgroundClip: 'text',
@@ -58,7 +58,7 @@ export default function StatCard({ value, suffix = '', label, desc }: StatCardPr
         {suffix}
       </div>
       <div className="mt-2 font-bold">{label}</div>
-      <div className="mt-2 text-sm leading-normal text-flow-muted">{desc}</div>
+      <div className="mt-2 text-sm leading-normal text-muted">{desc}</div>
     </div>
   )
 }

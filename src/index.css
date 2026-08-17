@@ -19,16 +19,6 @@
   --color-accent-purple: #a855f7;
   --color-accent-purple-light: #c9a9ff;
   --color-accent-gradient: linear-gradient(90deg, #2f5fe0, #a855f7);
-
-  /* RevealText / ServiceFlow / StatCard palette — keep in sync with src/styles/tokens.ts */
-  --color-flow-bg: #000000;
-  --color-flow-surface: #0a0a0b;
-  --color-flow-surface2: #131315;
-  --color-flow-border: rgba(255, 255, 255, 0.08);
-  --color-flow-muted: rgba(255, 255, 255, 0.55);
-  --color-flow-accent: #6c5ce7;
-  --color-flow-accent-glow: #a78bfa;
-  --color-flow-ok: #22c55e;
 }
 
 *,
