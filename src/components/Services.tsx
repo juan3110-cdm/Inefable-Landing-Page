@@ -1,4 +1,5 @@
 import { useTranslation } from '../hooks/useTranslation'
+import { firePrefill } from '../lib/prefill'
 
 const GRADIENTS: Record<string, string> = {
   web: 'linear-gradient(160deg, rgba(47,95,224,.35), rgba(47,95,224,.05))',
@@ -140,7 +141,7 @@ export default function Services() {
               </p>
               <a
                 href="#contacto"
-                onClick={() => sessionStorage.setItem('prefill-service', svc.key)}
+                onClick={() => firePrefill({ service: svc.key })}
                 style={{
                   background: 'transparent',
                   color: '#fff',

@@ -1,4 +1,5 @@
 import { useTranslation } from '../hooks/useTranslation'
+import { firePrefill } from '../lib/prefill'
 
 export default function Pricing() {
   const { t } = useTranslation()
@@ -84,7 +85,7 @@ export default function Pricing() {
             </ul>
             <a
               href="#contacto"
-              onClick={() => sessionStorage.setItem('prefill-service', plan.key)}
+              onClick={() => firePrefill({ service: plan.key })}
               style={{
                 background: 'var(--color-accent-gradient)',
                 color: '#fff',
@@ -117,7 +118,7 @@ export default function Pricing() {
           <div style={{ color: 'var(--color-muted)', fontSize: 13, lineHeight: 1.5 }}>{t.pricing.quote.desc}</div>
           <a
             href="#contacto"
-            onClick={() => sessionStorage.setItem('prefill-service', 'web')}
+            onClick={() => firePrefill({ service: 'web' })}
             style={{
               background: 'transparent',
               border: '1.5px solid rgba(255,255,255,.25)',

@@ -49,11 +49,21 @@ export default function Contact() {
   const [status, setStatus] = useState<FormStatus>('idle')
 
   useEffect(() => {
-    const prefill = sessionStorage.getItem('prefill-service')
-    if (prefill === 'web' || prefill === 'ads' || prefill === 'ai') {
-      setService(prefill)
-      sessionStorage.removeItem('prefill-service')
+    const applyPrefill = (svc: string | null, message: string | null) => {
+      if (svc === 'web' || svc === 'ads' || svc === 'ai') setService(svc)
+      if (message) setForm((prev) => ({ ...prev, message }))
     }
+
+    applyPrefill(sessionStorage.getItem('prefill-service'), sessionStorage.getItem('prefill-message'))
+    sessionStorage.removeItem('prefill-service')
+    sessionStorage.removeItem('prefill-message')
+
+    const onPrefill = (e: Event) => {
+      const detail = (e as CustomEvent<{ service?: string; message?: string }>).detail
+      applyPrefill(detail?.service ?? null, detail?.message ?? null)
+    }
+    window.addEventListener('inefable:prefill', onPrefill)
+    return () => window.removeEventListener('inefable:prefill', onPrefill)
   }, [])
 
   const set = <K extends keyof FormData>(key: K, val: FormData[K]) =>
