@@ -22,7 +22,7 @@ export interface ProcessTrack {
 }
 
 export interface PricingPlan {
-  key: 'web' | 'ads' | 'ai' | 'crm' | 'marketing' | 'restaurant'
+  key: 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
   name: string
   desc: string
   originalPrice?: string
@@ -83,7 +83,15 @@ export interface Translations {
     eyebrow: string
     title: string
     subtitle: string
-    serviceLabels: { web: string; ads: string; ai: string; crm: string; marketing: string; restaurant: string }
+    serviceLabels: {
+      web: string
+      ads: string
+      chatbot: string
+      ai: string
+      crm: string
+      marketing: string
+      restaurant: string
+    }
     fields: {
       name: string
       email: string
@@ -280,7 +288,7 @@ export const translations: Record<Lang, Translations> = {
           name: 'Desarrollo Web',
           desc: 'Sitio a medida, listo para producción.',
           originalPrice: '600€',
-          price: '300€',
+          price: '299.79€',
           period: 'pago único',
           badge: 'Oferta clientes fundadores',
           features: [
@@ -296,23 +304,40 @@ export const translations: Record<Lang, Translations> = {
           name: 'Gestión de Ads',
           desc: 'Gestión activa de tus campañas.',
           originalPrice: '150€',
-          price: '90€',
+          price: '89.79€',
           period: '/mes',
           badge: 'Precio de lanzamiento',
           features: ['Meta Ads + Google Ads', 'Reporte semanal', 'Optimización continua', 'Sin permanencia'],
           cta: 'Empezar con ads',
         },
         {
-          key: 'ai',
-          name: 'Recepcionista IA',
-          desc: 'Tu recepcionista, siempre disponible.',
-          originalPrice: '500€',
-          price: '200€',
+          key: 'chatbot',
+          name: 'Chatbot IA',
+          desc: 'Chat de texto en tu web: responde preguntas y capta leads sin necesidad de una llamada.',
+          originalPrice: '300€',
+          price: '124.79€',
           period: 'pago único',
-          note: '+ 50€/mes de mantenimiento · Menos del 10% del costo de un recepcionista humano',
+          note: 'Pruébalo ahora mismo: es el chat de abajo a la derecha · + 24.79€/mes de mantenimiento',
           badge: 'Oferta clientes fundadores',
           features: [
-            'Configuración del agente',
+            'Chat embebido en tu propia web',
+            'Entrenado con el contenido de tu negocio',
+            'Capta y cualifica leads automáticamente',
+            'Reporte mensual de conversaciones',
+          ],
+          cta: 'Activar mi chatbot',
+        },
+        {
+          key: 'ai',
+          name: 'Recepcionista IA',
+          desc: 'Contesta y dirige las llamadas de tu negocio, agenda citas sin que nadie tenga que descolgar.',
+          originalPrice: '500€',
+          price: '199.79€',
+          period: 'pago único',
+          note: '+ 49.79€/mes de mantenimiento · Menos del 10% del costo de un recepcionista humano',
+          badge: 'Oferta clientes fundadores',
+          features: [
+            'Contesta llamadas de tu negocio',
             'Disponible 24/7',
             'Agenda citas automáticamente',
             'Mantenimiento incluido',
@@ -324,9 +349,9 @@ export const translations: Record<Lang, Translations> = {
           name: 'CRM y Automatización',
           desc: 'Tu pipeline de ventas, organizado y automático.',
           originalPrice: '900€',
-          price: '350€',
+          price: '249.79€',
           period: 'pago único',
-          note: '+ 60€/mes de automatización y soporte',
+          note: '+ 49.79€/mes de automatización y soporte',
           badge: 'Oferta clientes fundadores',
           features: [
             'Implantación de CRM',
@@ -341,7 +366,7 @@ export const translations: Record<Lang, Translations> = {
           name: 'Marketing Automatizado',
           desc: 'Email, SMS y reputación, funcionando solos.',
           originalPrice: '200€',
-          price: '90€',
+          price: '89.79€',
           period: '/mes',
           badge: 'Oferta clientes fundadores',
           features: ['Email & SMS automatizado', 'Gestión de reputación online', 'Funnel de conversión', 'Reporte mensual'],
@@ -351,7 +376,7 @@ export const translations: Record<Lang, Translations> = {
           key: 'restaurant',
           name: 'Automatización para Restaurantes',
           desc: 'Menú QR, TPV, cocina y reservas en un solo sistema.',
-          price: 'Desde 270€',
+          price: 'Desde 269.79€',
           period: 'pago único',
           note: 'El precio final depende del tamaño y alcance del proyecto · + mantenimiento mensual',
           features: [
@@ -376,6 +401,7 @@ export const translations: Record<Lang, Translations> = {
       serviceLabels: {
         web: 'Desarrollo Web',
         ads: 'Gestión de Ads',
+        chatbot: 'Chatbot IA',
         ai: 'Recepcionista IA',
         crm: 'CRM',
         marketing: 'Marketing',
@@ -569,7 +595,7 @@ export const translations: Record<Lang, Translations> = {
           name: 'Web Development',
           desc: 'A custom site, ready for production.',
           originalPrice: '€600',
-          price: '€300',
+          price: '€299.79',
           period: 'one-time',
           badge: 'Founding customer offer',
           features: [
@@ -585,23 +611,40 @@ export const translations: Record<Lang, Translations> = {
           name: 'Ad Management',
           desc: 'Active management of your campaigns.',
           originalPrice: '€150',
-          price: '€90',
+          price: '€89.79',
           period: '/mo',
           badge: 'Launch pricing',
           features: ['Meta Ads + Google Ads', 'Weekly reporting', 'Continuous optimization', 'No lock-in'],
           cta: 'Start with ads',
         },
         {
-          key: 'ai',
-          name: 'AI Receptionist',
-          desc: 'Your receptionist, always on.',
-          originalPrice: '€500',
-          price: '€200',
+          key: 'chatbot',
+          name: 'AI Chatbot',
+          desc: "Text chat on your website: answers questions and captures leads without a single phone call.",
+          originalPrice: '€300',
+          price: '€124.79',
           period: 'one-time',
-          note: '+ €50/mo maintenance · Less than 10% of the cost of a human receptionist',
+          note: "Try it right now: it's the chat in the bottom-right corner · + €24.79/mo maintenance",
           badge: 'Founding customer offer',
           features: [
-            'Agent setup',
+            'Chat embedded on your own website',
+            'Trained on your business content',
+            'Captures and qualifies leads automatically',
+            'Monthly conversation report',
+          ],
+          cta: 'Activate my chatbot',
+        },
+        {
+          key: 'ai',
+          name: 'AI Receptionist',
+          desc: "Answers and directs your business calls, books appointments so no one has to pick up the phone.",
+          originalPrice: '€500',
+          price: '€199.79',
+          period: 'one-time',
+          note: '+ €49.79/mo maintenance · Less than 10% of the cost of a human receptionist',
+          badge: 'Founding customer offer',
+          features: [
+            'Answers your business calls',
             'Available 24/7',
             'Books appointments automatically',
             'Maintenance included',
@@ -613,9 +656,9 @@ export const translations: Record<Lang, Translations> = {
           name: 'CRM & Automation',
           desc: 'Your sales pipeline, organized and automatic.',
           originalPrice: '€900',
-          price: '€350',
+          price: '€249.79',
           period: 'one-time',
-          note: '+ €60/mo automation and support',
+          note: '+ €49.79/mo automation and support',
           badge: 'Founding customer offer',
           features: [
             'CRM implementation',
@@ -630,7 +673,7 @@ export const translations: Record<Lang, Translations> = {
           name: 'Marketing Automation',
           desc: 'Email, SMS and reputation, running on their own.',
           originalPrice: '€200',
-          price: '€90',
+          price: '€89.79',
           period: '/mo',
           badge: 'Founding customer offer',
           features: ['Automated email & SMS', 'Online reputation management', 'Conversion funnel', 'Monthly reporting'],
@@ -640,7 +683,7 @@ export const translations: Record<Lang, Translations> = {
           key: 'restaurant',
           name: 'Restaurant Automation',
           desc: 'QR menu, POS, kitchen and reservations in one system.',
-          price: 'From €270',
+          price: 'From €269.79',
           period: 'one-time',
           note: 'Final price depends on the size and scope of the project · plus monthly maintenance',
           features: [
@@ -665,6 +708,7 @@ export const translations: Record<Lang, Translations> = {
       serviceLabels: {
         web: 'Web Development',
         ads: 'Ad Management',
+        chatbot: 'AI Chatbot',
         ai: 'AI Receptionist',
         crm: 'CRM',
         marketing: 'Marketing',

@@ -1,7 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react'
 import { useTranslation } from '../hooks/useTranslation'
 
-type ServiceType = 'web' | 'ads' | 'ai' | 'crm' | 'marketing' | 'restaurant'
+type ServiceType = 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
 interface FormData {
@@ -50,7 +50,15 @@ export default function Contact() {
 
   useEffect(() => {
     const applyPrefill = (svc: string | null, message: string | null) => {
-      if (svc === 'web' || svc === 'ads' || svc === 'ai' || svc === 'crm' || svc === 'marketing' || svc === 'restaurant') {
+      if (
+        svc === 'web' ||
+        svc === 'ads' ||
+        svc === 'chatbot' ||
+        svc === 'ai' ||
+        svc === 'crm' ||
+        svc === 'marketing' ||
+        svc === 'restaurant'
+      ) {
         setService(svc)
       }
       if (message) setForm((prev) => ({ ...prev, message }))
@@ -113,6 +121,7 @@ export default function Contact() {
   const tabs: { key: ServiceType; label: string }[] = [
     { key: 'web', label: t.contact.serviceLabels.web },
     { key: 'ads', label: t.contact.serviceLabels.ads },
+    { key: 'chatbot', label: t.contact.serviceLabels.chatbot },
     { key: 'ai', label: t.contact.serviceLabels.ai },
     { key: 'crm', label: t.contact.serviceLabels.crm },
     { key: 'marketing', label: t.contact.serviceLabels.marketing },
