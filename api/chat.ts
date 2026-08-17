@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Anthropic from '@anthropic-ai/sdk'
+import { getClientIp, isRateLimited } from './_lib/rateLimit'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -44,28 +45,6 @@ CRITERIO:
 interface ChatMessage {
   role: 'user' | 'assistant'
   content: string
-}
-
-// Best-effort in-memory limiter. Resets on cold start / across instances,
-// but caps abuse from a single warm-lambda IP within the window.
-const hits = new Map<string, { count: number; resetAt: number }>()
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const entry = hits.get(ip)
-  if (!entry || now > entry.resetAt) {
-    hits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
-    return false
-  }
-  if (entry.count >= RATE_LIMIT_MAX) return true
-  entry.count += 1
-  return false
-}
-
-function getClientIp(req: VercelRequest): string {
-  const forwarded = req.headers['x-forwarded-for']
-  if (typeof forwarded === 'string' && forwarded.length > 0) return forwarded.split(',')[0].trim()
-  return req.socket?.remoteAddress ?? 'unknown'
 }
 
 // Rule-based fallback used while ANTHROPIC_API_KEY isn't configured yet, so the
@@ -132,7 +111,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const ip = getClientIp(req)
-  if (isRateLimited(ip)) {
+  if (isRateLimited(`chat:${ip}`, { windowMs: RATE_LIMIT_WINDOW_MS, max: RATE_LIMIT_MAX })) {
     return res.status(429).json({ error: 'Too many requests. Please try again in a few minutes.' })
   }
 

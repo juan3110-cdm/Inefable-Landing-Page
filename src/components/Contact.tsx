@@ -2,7 +2,7 @@ import { useState, useEffect, type FormEvent } from 'react'
 import { useTranslation } from '../hooks/useTranslation'
 
 type ServiceType = 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
-type FormStatus = 'idle' | 'sending' | 'success' | 'error'
+type FormStatus = 'idle' | 'sending' | 'success' | 'error' | 'server-error'
 
 interface FormData {
   name: string
@@ -114,7 +114,7 @@ export default function Contact() {
       setStatus('success')
       setForm(INITIAL)
     } catch {
-      setStatus('error')
+      setStatus('server-error')
     }
   }
 
@@ -191,68 +191,109 @@ export default function Contact() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-              <input required value={form.name} onChange={(e) => set('name', e.target.value)} placeholder={f.name} style={inputStyle} />
-              <input required type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder={f.email} style={inputStyle} />
-              <input value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder={f.phone} style={inputStyle} />
-              <select value={form.country} onChange={(e) => set('country', e.target.value)} style={inputStyle}>
-                <option value="">{f.country}</option>
-                <option value="ES">España</option>
-                <option value="US">Estados Unidos</option>
-                <option value="VE">Venezuela</option>
-                <option value="SV">El Salvador</option>
-                <option value="other">{f.countryOther}</option>
-              </select>
+              <div>
+                <label htmlFor="contact-name" className="sr-only">{f.name}</label>
+                <input id="contact-name" required value={form.name} onChange={(e) => set('name', e.target.value)} placeholder={f.name} style={inputStyle} />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="sr-only">{f.email}</label>
+                <input id="contact-email" required type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder={f.email} style={inputStyle} />
+              </div>
+              <div>
+                <label htmlFor="contact-phone" className="sr-only">{f.phone}</label>
+                <input id="contact-phone" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder={f.phone} style={inputStyle} />
+              </div>
+              <div>
+                <label htmlFor="contact-country" className="sr-only">{f.country}</label>
+                <select id="contact-country" value={form.country} onChange={(e) => set('country', e.target.value)} style={inputStyle}>
+                  <option value="">{f.country}</option>
+                  <option value="ES">España</option>
+                  <option value="US">Estados Unidos</option>
+                  <option value="VE">Venezuela</option>
+                  <option value="SV">El Salvador</option>
+                  <option value="other">{f.countryOther}</option>
+                </select>
+              </div>
             </div>
 
             {service === 'web' && (
               <>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                  <input
-                    value={form.businessType}
-                    onChange={(e) => set('businessType', e.target.value)}
-                    placeholder={f.businessType}
-                    style={inputStyle}
-                  />
-                  <select value={form.hasWebsite} onChange={(e) => set('hasWebsite', e.target.value as FormData['hasWebsite'])} style={inputStyle}>
-                    <option value="">{f.hasWebsite}</option>
-                    <option value="yes">{f.yes}</option>
-                    <option value="no">{f.no}</option>
-                  </select>
+                  <div>
+                    <label htmlFor="contact-business-type" className="sr-only">{f.businessType}</label>
+                    <input
+                      id="contact-business-type"
+                      value={form.businessType}
+                      onChange={(e) => set('businessType', e.target.value)}
+                      placeholder={f.businessType}
+                      style={inputStyle}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-has-website" className="sr-only">{f.hasWebsite}</label>
+                    <select
+                      id="contact-has-website"
+                      value={form.hasWebsite}
+                      onChange={(e) => set('hasWebsite', e.target.value as FormData['hasWebsite'])}
+                      style={inputStyle}
+                    >
+                      <option value="">{f.hasWebsite}</option>
+                      <option value="yes">{f.yes}</option>
+                      <option value="no">{f.no}</option>
+                    </select>
+                  </div>
                 </div>
                 {form.hasWebsite === 'yes' && (
-                  <input
-                    value={form.websiteUrl}
-                    onChange={(e) => set('websiteUrl', e.target.value)}
-                    placeholder={f.websiteUrl}
-                    style={inputStyle}
-                  />
+                  <div>
+                    <label htmlFor="contact-website-url" className="sr-only">{f.websiteUrl}</label>
+                    <input
+                      id="contact-website-url"
+                      value={form.websiteUrl}
+                      onChange={(e) => set('websiteUrl', e.target.value)}
+                      placeholder={f.websiteUrl}
+                      style={inputStyle}
+                    />
+                  </div>
                 )}
               </>
             )}
 
             {service === 'ads' && (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                <select value={form.currentPlatform} onChange={(e) => set('currentPlatform', e.target.value)} style={inputStyle}>
-                  <option value="">{f.currentPlatform}</option>
-                  <option value="meta">Meta Ads</option>
-                  <option value="google">Google Ads</option>
-                  <option value="none">{f.platformNone}</option>
-                </select>
-                <input value={form.budget} onChange={(e) => set('budget', e.target.value)} placeholder={f.budget} style={inputStyle} />
+                <div>
+                  <label htmlFor="contact-current-platform" className="sr-only">{f.currentPlatform}</label>
+                  <select id="contact-current-platform" value={form.currentPlatform} onChange={(e) => set('currentPlatform', e.target.value)} style={inputStyle}>
+                    <option value="">{f.currentPlatform}</option>
+                    <option value="meta">Meta Ads</option>
+                    <option value="google">Google Ads</option>
+                    <option value="none">{f.platformNone}</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="contact-budget" className="sr-only">{f.budget}</label>
+                  <input id="contact-budget" value={form.budget} onChange={(e) => set('budget', e.target.value)} placeholder={f.budget} style={inputStyle} />
+                </div>
               </div>
             )}
 
-            <textarea
-              required
-              rows={4}
-              value={form.message}
-              onChange={(e) => set('message', e.target.value)}
-              placeholder={f.message}
-              style={{ ...inputStyle, resize: 'vertical' }}
-            />
+            <div>
+              <label htmlFor="contact-message" className="sr-only">{f.message}</label>
+              <textarea
+                id="contact-message"
+                required
+                rows={4}
+                value={form.message}
+                onChange={(e) => set('message', e.target.value)}
+                placeholder={f.message}
+                style={{ ...inputStyle, resize: 'vertical' }}
+              />
+            </div>
 
             {status === 'error' && (
               <div style={{ color: '#ff8a8a', fontSize: 13 }}>{t.contact.error}</div>
+            )}
+            {status === 'server-error' && (
+              <div style={{ color: '#ff8a8a', fontSize: 13 }}>{t.contact.serverError}</div>
             )}
 
             <button

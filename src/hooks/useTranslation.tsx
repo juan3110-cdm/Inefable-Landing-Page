@@ -3,6 +3,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useEffect,
   type ReactNode,
 } from 'react'
 import { translations, type Lang, type Translations } from '../i18n/translations'
@@ -37,6 +38,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       // noop
     }
   }, [])
+
+  useEffect(() => {
+    const t = translations[lang]
+    document.documentElement.lang = lang
+    document.title = t.pageTitle
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.metaDescription)
+  }, [lang])
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] }}>

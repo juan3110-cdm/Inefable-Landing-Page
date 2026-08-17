@@ -1,15 +1,43 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { Resend } from 'resend'
+import { getClientIp, isRateLimited } from './_lib/rateLimit'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX = 5
+
+// Real origins this endpoint should ever be called from. inefable.es is
+// deliberately not here — it currently serves an unrelated business.
+const ALLOWED_ORIGINS = ['https://inefable-landing-page.vercel.app']
+
+function applyCors(req: VercelRequest, res: VercelResponse) {
+  const origin = req.headers.origin
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+}
+
+const SERVICE_LABELS: Record<string, { emoji: string; label: string }> = {
+  web: { emoji: '🌐', label: 'Desarrollo Web' },
+  ads: { emoji: '📣', label: 'Gestión de Publicidad' },
+  chatbot: { emoji: '🤖', label: 'Chatbot IA' },
+  ai: { emoji: '📞', label: 'Recepcionista IA' },
+  crm: { emoji: '📇', label: 'CRM y Automatización' },
+  marketing: { emoji: '📈', label: 'Marketing Automatizado' },
+  restaurant: { emoji: '🍽️', label: 'Automatización para Restaurantes' },
+}
+const UNKNOWN_SERVICE = { emoji: '📩', label: 'Consulta general' }
+
+function getServiceLabel(service: string | undefined) {
+  return (service && SERVICE_LABELS[service]) || UNKNOWN_SERVICE
+}
+
 function buildHtml(data: Record<string, string>): string {
-  const serviceLabel =
-    data.service === 'web'
-      ? '🌐 Desarrollo Web'
-      : data.service === 'ads'
-        ? '📣 Gestión de Publicidad'
-        : '🤖 Recepcionista IA'
+  const { emoji, label } = getServiceLabel(data.service)
+  const serviceLabel = `${emoji} ${label}`
 
   const rows = Object.entries(data)
     .filter(([k, v]) => k !== 'service' && v)
@@ -44,13 +72,15 @@ function buildHtml(data: Record<string, string>): string {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // CORS for local dev
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  applyCors(req, res)
 
   if (req.method === 'OPTIONS') return res.status(200).end()
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+
+  const ip = getClientIp(req)
+  if (isRateLimited(`contact:${ip}`, { windowMs: RATE_LIMIT_WINDOW_MS, max: RATE_LIMIT_MAX })) {
+    return res.status(429).json({ error: 'Too many requests. Please try again in a few minutes.' })
+  }
 
   const { name, email, service } = req.body as Record<string, string>
 
@@ -58,8 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Missing required fields' })
   }
 
-  const serviceLabel =
-    service === 'web' ? 'Desarrollo Web' : service === 'ads' ? 'Gestión de Publicidad' : 'Recepcionista IA'
+  const { label: serviceLabel } = getServiceLabel(service)
 
   try {
     await resend.emails.send({

@@ -35,6 +35,7 @@ export interface PricingPlan {
 }
 
 export interface Translations {
+  pageTitle: string
   metaDescription: string
   nav: {
     services: string
@@ -109,6 +110,7 @@ export interface Translations {
       message: string
     }
     error: string
+    serverError: string
     success: { title: string; body: string }
     submit: string
     sending: string
@@ -128,6 +130,7 @@ export interface Translations {
 
 export const translations: Record<Lang, Translations> = {
   es: {
+    pageTitle: 'Inefable | Agencia Digital · Madrid',
     metaDescription:
       'Inefable — Agencia de desarrollo web, publicidad y automatización con IA en Madrid, para clientes en cualquier país.',
     nav: {
@@ -424,6 +427,7 @@ export const translations: Record<Lang, Translations> = {
         message: 'Cuéntanos sobre tu proyecto',
       },
       error: 'Completa nombre, email y mensaje.',
+      serverError: 'Algo falló por nuestra parte — inténtalo de nuevo o escríbenos directamente a hola@inefable.agency.',
       success: { title: '¡Recibido!', body: 'Gracias por escribirnos. Te contactamos muy pronto.' },
       submit: 'Enviar',
       sending: 'Enviando…',
@@ -442,6 +446,7 @@ export const translations: Record<Lang, Translations> = {
   },
 
   en: {
+    pageTitle: 'Inefable | Digital Agency · Madrid',
     metaDescription:
       'Inefable — Web development, ad management and AI automation agency based in Madrid, serving clients in any country.',
     nav: {
@@ -731,6 +736,7 @@ export const translations: Record<Lang, Translations> = {
         message: 'Tell us about your project',
       },
       error: 'Please fill in name, email and message.',
+      serverError: 'Something went wrong on our end — please try again, or email us directly at hola@inefable.agency.',
       success: { title: 'Got it!', body: "Thanks for reaching out. We'll be in touch shortly." },
       submit: 'Send',
       sending: 'Sending…',
