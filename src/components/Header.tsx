@@ -57,7 +57,7 @@ export default function Header() {
 
       {/* Logo */}
       <a href="#" className="justify-self-center">
-        <Logo size={19} />
+        <Logo size={32} />
       </a>
 
       {/* Right: lang selector + CTA */}

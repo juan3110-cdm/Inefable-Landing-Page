@@ -17,7 +17,7 @@ export default function Footer() {
       }}
     >
       <span style={{ opacity: 0.85 }}>
-        <Logo size={16} />
+        <Logo size={26} />
       </span>
       <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', fontSize: 13, color: '#9a92b3' }}>
         <span>Madrid, España</span>
