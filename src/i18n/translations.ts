@@ -114,7 +114,7 @@ export interface Translations {
 export const translations: Record<Lang, Translations> = {
   es: {
     metaDescription:
-      'Inefable — Agencia de desarrollo web y gestión de publicidad en Madrid, para España, EE.UU., Venezuela y El Salvador.',
+      'Inefable — Agencia de desarrollo web, publicidad y automatización con IA en Madrid, para clientes en cualquier país.',
     nav: {
       services: 'Servicios',
       why: 'Por qué Inefable',
@@ -401,7 +401,7 @@ export const translations: Record<Lang, Translations> = {
 
   en: {
     metaDescription:
-      'Inefable — Web development and ad management agency based in Madrid, serving Spain, the US, Venezuela and El Salvador.',
+      'Inefable — Web development, ad management and AI automation agency based in Madrid, serving clients in any country.',
     nav: {
       services: 'Services',
       why: 'Why Inefable',

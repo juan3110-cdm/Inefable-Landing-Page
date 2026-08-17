@@ -37,7 +37,7 @@ function App() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <StatCard value={24} suffix="h" label="tiempo de respuesta" desc="Te contactamos en menos de 24 horas laborables." />
                 <StatCard value={3} label="rondas de ajuste" desc="Incluidas en cada proyecto, sin coste extra." />
-                <StatCard value={4} label="países" desc="España, Estados Unidos, Venezuela y El Salvador." />
+                <StatCard value={100} suffix="%" label="remoto, cualquier país" desc="Trabajamos con clientes de cualquier parte del mundo, sin excepciones." />
               </div>
             </div>
           </section>
