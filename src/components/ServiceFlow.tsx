@@ -6,8 +6,18 @@ interface ServiceFlowProps {
   target?: string
 }
 
+const CARD_W = 130
+const CARD_TOP = 20
+const CARD_BOTTOM = 150
+const GAP = 65
+const MARGIN = 40
+const JOIN_Y = 250
+const VIEW_H = 330
+
 /* ============================================================
-   DIAGRAMA DE NODOS  (3 servicios -> tu negocio)
+   DIAGRAMA DE NODOS  (N servicios -> tu negocio)
+   Posiciones y conectores se calculan a partir de items.length,
+   así que soporta cualquier cantidad de nodos, no solo 3.
    Con línea de luz que viaja y check verde en secuencia.
    ============================================================ */
 export default function ServiceFlow({ items = ['Marca', 'Web', 'Automatización'], target = 'Tu negocio' }: ServiceFlowProps) {
@@ -22,20 +32,31 @@ export default function ServiceFlow({ items = ['Marca', 'Web', 'Automatización'
     return () => clearInterval(t)
   }, [items.length])
 
-  const paths = [
-    'M105,150 L105,235 A15,15 0 0 0 120,250 L300,250',
-    'M300,150 L300,250',
-    'M495,150 L495,235 A15,15 0 0 1 480,250 L300,250',
-  ]
+  const n = items.length
+  const totalW = n * CARD_W + (n - 1) * GAP
+  const viewW = MARGIN * 2 + totalW
+  const centerX = viewW / 2
+  const pillX = centerX - 100
+  const xs = Array.from({ length: n }, (_, i) => MARGIN + i * (CARD_W + GAP))
+
+  const connectorPath = (cardX: number) => {
+    const cx = cardX + 65 // label-center x, where the connector visually anchors
+    if (Math.abs(cx - centerX) < 1) {
+      return `M${cx},${CARD_BOTTOM} L${cx},${JOIN_Y}`
+    }
+    const dir = cx < centerX ? 1 : -1
+    const sweep = dir > 0 ? 0 : 1
+    return `M${cx},${CARD_BOTTOM} L${cx},${JOIN_Y - 15} A15,15 0 0 ${sweep} ${cx + dir * 15},${JOIN_Y} L${centerX},${JOIN_Y}`
+  }
 
   return (
     <div className="mx-auto w-full max-w-[560px] min-w-[320px] overflow-x-auto rounded-3xl border border-border bg-surface p-6">
-      <svg viewBox="0 0 600 330" style={{ width: '100%', display: 'block' }}>
+      <svg viewBox={`0 0 ${viewW} ${VIEW_H}`} style={{ width: '100%', display: 'block' }}>
         {/* tarjetas */}
-        {[40, 235, 430].map((x, i) => (
+        {xs.map((x, i) => (
           <g key={i}>
-            <path d={`M${x},20 L${x + 100},20 L${x + 130},50 L${x + 130},150 L${x},150 Z`} fill="url(#cardGrad)" stroke={tokens.border} />
-            <path d={`M${x + 100},20 L${x + 130},50 L${x + 100},50 Z`} fill="rgba(255,255,255,0.10)" />
+            <path d={`M${x},${CARD_TOP} L${x + 100},${CARD_TOP} L${x + 130},50 L${x + 130},${CARD_BOTTOM} L${x},${CARD_BOTTOM} Z`} fill="url(#cardGrad)" stroke={tokens.border} />
+            <path d={`M${x + 100},${CARD_TOP} L${x + 130},50 L${x + 100},50 Z`} fill="rgba(255,255,255,0.10)" />
             {/* indicador de estado */}
             {active === i && done !== i && (
               <circle
@@ -65,12 +86,12 @@ export default function ServiceFlow({ items = ['Marca', 'Web', 'Automatización'
         ))}
 
         {/* conectores */}
-        {paths.map((d, i) => (
+        {xs.map((x, i) => (
           <g key={i}>
-            <path d={d} stroke="rgba(255,255,255,0.14)" strokeWidth="1" fill="none" />
+            <path d={connectorPath(x)} stroke="rgba(255,255,255,0.14)" strokeWidth="1" fill="none" />
             <path
               className="flow-beam"
-              d={d}
+              d={connectorPath(x)}
               stroke={tokens.accentGlow}
               strokeWidth="1.5"
               fill="none"
@@ -82,14 +103,14 @@ export default function ServiceFlow({ items = ['Marca', 'Web', 'Automatización'
             />
           </g>
         ))}
-        <path d="M300,250 L300,278" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-        <rect x="294" y="244" width="12" height="12" rx="3" fill="#1c1c20" stroke={tokens.border} />
+        <path d={`M${centerX},${JOIN_Y} L${centerX},278`} stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
+        <rect x={centerX - 6} y={JOIN_Y - 6} width="12" height="12" rx="3" fill="#1c1c20" stroke={tokens.border} />
 
         {/* pill final */}
-        <rect x="200" y="278" width="200" height="44" rx="22" fill={tokens.surface2} stroke={tokens.border} />
-        <circle cx="228" cy="300" r="11" fill={tokens.accent} />
-        <path d="M228,295 v10 M223,300 h10" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
-        <text x="252" y="305" fill="#fff" fontSize="15" fontFamily="system-ui, sans-serif">
+        <rect x={pillX} y="278" width="200" height="44" rx="22" fill={tokens.surface2} stroke={tokens.border} />
+        <circle cx={pillX + 28} cy="300" r="11" fill={tokens.accent} />
+        <path d={`M${pillX + 28},295 v10 M${pillX + 23},300 h10`} stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+        <text x={pillX + 52} y="305" fill="#fff" fontSize="15" fontFamily="system-ui, sans-serif">
           {target}
         </text>
 

@@ -4,6 +4,7 @@ import { firePrefill } from '../lib/prefill'
 const GRADIENTS: Record<string, string> = {
   web: 'linear-gradient(160deg, rgba(47,95,224,.35), rgba(47,95,224,.05))',
   ads: 'linear-gradient(160deg, rgba(168,85,247,.35), rgba(168,85,247,.05))',
+  chatbot: 'linear-gradient(160deg, rgba(34,211,238,.35), rgba(34,211,238,.05))',
   ai: 'linear-gradient(160deg, rgba(108,138,255,.35), rgba(108,138,255,.05))',
   crm: 'linear-gradient(160deg, rgba(45,212,191,.35), rgba(45,212,191,.05))',
   marketing: 'linear-gradient(160deg, rgba(251,146,60,.35), rgba(251,146,60,.05))',
@@ -52,6 +53,14 @@ function ServiceIcon({ svcKey }: { svcKey: string }) {
       </svg>
     )
   }
+  if (svcKey === 'chatbot') {
+    return (
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.62-.32-3.73-.9L4 21l1.9-4.77A8.5 8.5 0 1 1 21 11.5z" />
+      </svg>
+    )
+  }
+  // ai (voice receptionist)
   return (
     <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3z" />

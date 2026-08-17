@@ -1,5 +1,4 @@
 import { useTranslation } from '../hooks/useTranslation'
-import { firePrefill } from '../lib/prefill'
 
 export default function Hero() {
   const { t } = useTranslation()
@@ -104,7 +103,6 @@ export default function Hero() {
         >
           <a
             href="#contacto"
-            onClick={() => firePrefill({ service: 'web' })}
             style={{
               background: '#fff',
               color: '#0b0b12',
@@ -115,11 +113,10 @@ export default function Hero() {
               transition: 'transform .2s',
             }}
           >
-            {t.hero.ctaWeb}
+            {t.hero.ctaPrimary}
           </a>
           <a
-            href="#contacto"
-            onClick={() => firePrefill({ service: 'ads' })}
+            href="#servicios"
             style={{
               background: 'rgba(255,255,255,.06)',
               color: '#fff',
@@ -130,104 +127,7 @@ export default function Hero() {
               border: '1px solid rgba(255,255,255,.18)',
             }}
           >
-            {t.hero.ctaAds}
-          </a>
-          <a
-            href="#contacto"
-            onClick={() => firePrefill({ service: 'crm' })}
-            style={{
-              background: 'rgba(255,255,255,.06)',
-              color: '#fff',
-              fontSize: 15,
-              fontWeight: 700,
-              padding: '14px 26px',
-              borderRadius: 100,
-              border: '1px solid rgba(255,255,255,.18)',
-            }}
-          >
-            {t.hero.ctaCrm}
-          </a>
-          <a
-            href="#contacto"
-            onClick={() => firePrefill({ service: 'marketing' })}
-            style={{
-              background: 'rgba(255,255,255,.06)',
-              color: '#fff',
-              fontSize: 15,
-              fontWeight: 700,
-              padding: '14px 26px',
-              borderRadius: 100,
-              border: '1px solid rgba(255,255,255,.18)',
-            }}
-          >
-            {t.hero.ctaMarketing}
-          </a>
-          <a
-            href="#contacto"
-            onClick={() => firePrefill({ service: 'restaurant' })}
-            style={{
-              background: 'rgba(255,255,255,.06)',
-              color: '#fff',
-              fontSize: 15,
-              fontWeight: 700,
-              padding: '14px 26px',
-              borderRadius: 100,
-              border: '1px solid rgba(255,255,255,.18)',
-            }}
-          >
-            {t.hero.ctaRestaurant}
-          </a>
-          <a
-            href="#contacto"
-            onClick={() => firePrefill({ service: 'ai' })}
-            style={{
-              background: '#15121e',
-              border: '1px solid rgba(168,133,255,.35)',
-              borderRadius: 18,
-              padding: '14px 16px',
-              boxShadow: '0 20px 40px rgba(0,0,0,.4)',
-              display: 'flex',
-              gap: 12,
-              alignItems: 'flex-start',
-              textAlign: 'left',
-              cursor: 'pointer',
-            }}
-          >
-            <div
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg,#2f5fe0,#a855f7)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 15,
-                flexShrink: 0,
-              }}
-            >
-              ☎
-            </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: '50%',
-                    background: '#3ac478',
-                    animation: 'pulseDot 2s ease-in-out infinite',
-                  }}
-                />
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#8ee6ae', letterSpacing: '.03em' }}>
-                  {t.hero.aiWidget.status}
-                </span>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 2 }}>
-                {t.hero.aiWidget.title}
-              </div>
-              <div style={{ fontSize: 12, color: '#a79fbf', lineHeight: 1.4 }}>{t.hero.aiWidget.line}</div>
-            </div>
+            {t.hero.ctaSecondary}
           </a>
         </div>
       </div>

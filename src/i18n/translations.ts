@@ -1,7 +1,7 @@
 export type Lang = 'es' | 'en'
 
 export interface ServiceItem {
-  key: 'web' | 'ads' | 'ai' | 'crm' | 'marketing' | 'restaurant'
+  key: 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
   number: string
   title: string
   description: string
@@ -50,18 +50,14 @@ export interface Translations {
     titleA: string
     titleB: string
     subtitle: string
-    ctaWeb: string
-    ctaAds: string
-    ctaCrm: string
-    ctaMarketing: string
-    ctaRestaurant: string
-    aiWidget: { status: string; title: string; line: string }
+    ctaPrimary: string
+    ctaSecondary: string
   }
   scroll: { titleA: string; titleB: string }
   growth: {
     titleA: string
     titleB: string
-    flowItems: [string, string, string]
+    flowItems: string[]
     flowTarget: string
     stats: { value: number; suffix?: string; label: string; desc: string }[]
   }
@@ -143,36 +139,43 @@ export const translations: Record<Lang, Translations> = {
     },
     hero: {
       eyebrow: 'Webs, ads y automatización con IA',
-      titleA: 'Sitios que cargan rápido.',
-      titleB: 'Anuncios que convierten.',
+      titleA: 'Tu negocio,',
+      titleB: 'automatizado de principio a fin.',
       subtitle:
-        'Inefable combina desarrollo web moderno con gestión de publicidad basada en datos — sin vueltas, sin contratos eternos.',
-      ctaWeb: 'Quiero mi web',
-      ctaAds: 'Quiero gestionar mis ads',
-      ctaCrm: 'Quiero mi CRM',
-      ctaMarketing: 'Quiero automatizar mi marketing',
-      ctaRestaurant: 'Quiero automatizar mi restaurante',
-      aiWidget: {
-        status: 'En línea',
-        title: 'Recepcionista IA',
-        line: '¿En qué puedo ayudarte hoy?',
-      },
+        'Inefable combina desarrollo web, publicidad y automatización con IA — sin vueltas, sin contratos eternos.',
+      ctaPrimary: 'Hablemos de tu negocio',
+      ctaSecondary: 'Ver todos los servicios',
     },
     scroll: { titleA: 'De clics', titleB: 'a clientes.' },
     growth: {
       titleA: 'Web, ads e IA trabajando juntos por tu negocio',
-      titleB: 'Compromisos que sí cumplimos',
-      flowItems: ['Web', 'Ads', 'IA'],
+      titleB: 'Automatizar cuesta menos de lo que crees',
+      flowItems: ['Web', 'Ads', 'Chatbot', 'Voz'],
       flowTarget: 'Tu negocio',
       stats: [
-        { value: 24, suffix: 'h', label: 'tiempo de respuesta', desc: 'Te contactamos en menos de 24 horas laborables.' },
-        { value: 3, label: 'rondas de ajuste', desc: 'Incluidas en cada proyecto, sin coste extra.' },
-        { value: 100, suffix: '%', label: 'remoto, cualquier país', desc: 'Trabajamos con clientes de cualquier parte del mundo, sin excepciones.' },
+        {
+          value: 97,
+          suffix: '%',
+          label: 'menos que un recepcionista',
+          desc: 'Recepcionista IA: 49,79€/mes frente a ~2.246€/mes de coste medio de un recepcionista en España.',
+        },
+        {
+          value: 98,
+          suffix: '%',
+          label: 'menos que atención al cliente',
+          desc: 'Chatbot IA: 24,79€/mes frente a ~2.100€/mes de coste medio de un puesto de atención al cliente en España.',
+        },
+        {
+          value: 96,
+          suffix: '%',
+          label: 'menos que un community manager',
+          desc: 'Marketing Automatizado: 89,79€/mes frente a ~2.600€/mes de coste medio de un community manager en España.',
+        },
       ],
     },
     services: {
       eyebrow: 'Servicios',
-      title: 'Seis formas de crecer',
+      title: 'Siete formas de crecer',
       items: [
         {
           key: 'web',
@@ -194,21 +197,34 @@ export const translations: Record<Lang, Translations> = {
           hasPlatformIcons: true,
         },
         {
-          key: 'ai',
+          key: 'chatbot',
           number: '03',
-          title: 'Recepcionista IA',
-          description: 'Un agente de IA que atiende llamadas y mensajes de tu negocio, 24/7.',
+          title: 'Chatbot IA',
+          description: 'Un chat de texto en tu web que responde y capta leads — para cuando el contacto no necesita ser una llamada.',
           bullets: [
+            'Chat de texto, no llamadas',
+            'Responde en tu web 24/7',
+            'Deriva a tu equipo cuando hace falta',
+            'Pruébalo abajo a la derecha',
+          ],
+          cta: 'Hablemos de tu chatbot',
+        },
+        {
+          key: 'ai',
+          number: '04',
+          title: 'Recepcionista IA',
+          description: 'Un agente de IA que contesta y dirige las llamadas de tu negocio, 24/7.',
+          bullets: [
+            'Contesta llamadas de tu negocio',
             'Disponible 24/7',
-            'Agenda citas sola',
-            'Responde preguntas frecuentes',
-            'WhatsApp y teléfono',
+            'Agenda citas automáticamente',
+            'Deriva a tu equipo si hace falta',
           ],
           cta: 'Hablemos de tu recepcionista IA',
         },
         {
           key: 'crm',
-          number: '04',
+          number: '05',
           title: 'Automatización de CRM',
           description:
             'Todo tu pipeline de ventas organizado y automático, sin leads perdidos en WhatsApp o notas sueltas.',
@@ -217,7 +233,7 @@ export const translations: Record<Lang, Translations> = {
         },
         {
           key: 'marketing',
-          number: '05',
+          number: '06',
           title: 'Marketing Automatizado',
           description:
             'Email, SMS y reputación funcionando solos, para que cada cliente reciba el mensaje correcto a tiempo.',
@@ -226,7 +242,7 @@ export const translations: Record<Lang, Translations> = {
         },
         {
           key: 'restaurant',
-          number: '06',
+          number: '07',
           title: 'Automatización para Restaurantes',
           description:
             'Menú QR conectado al TPV, pedidos directos a cocina y reservas por WhatsApp, todo en un mismo sistema.',
@@ -293,7 +309,7 @@ export const translations: Record<Lang, Translations> = {
           originalPrice: '600€',
           price: '299.79€',
           period: 'pago único',
-          badge: 'Oferta clientes fundadores',
+          badge: 'Oferta primeros 20 clientes fundadores',
           features: [
             'Sitio en React + Vite + Tailwind',
             'Hasta 3 rondas de correcciones',
@@ -321,7 +337,7 @@ export const translations: Record<Lang, Translations> = {
           price: '124.79€',
           period: 'pago único',
           note: 'Pruébalo ahora mismo: es el chat de abajo a la derecha · + 24.79€/mes de mantenimiento',
-          badge: 'Oferta clientes fundadores',
+          badge: 'Oferta primeros 20 clientes fundadores',
           features: [
             'Chat embebido en tu propia web',
             'Entrenado con el contenido de tu negocio',
@@ -338,7 +354,6 @@ export const translations: Record<Lang, Translations> = {
           price: '199.79€',
           period: 'pago único',
           note: '+ 49.79€/mes de mantenimiento · Menos del 10% del costo de un recepcionista humano',
-          badge: 'Oferta clientes fundadores',
           features: [
             'Contesta llamadas de tu negocio',
             'Disponible 24/7',
@@ -355,7 +370,6 @@ export const translations: Record<Lang, Translations> = {
           price: '249.79€',
           period: 'pago único',
           note: '+ 49.79€/mes de automatización y soporte',
-          badge: 'Oferta clientes fundadores',
           features: [
             'Implantación de CRM',
             'Migración de datos existentes',
@@ -371,7 +385,6 @@ export const translations: Record<Lang, Translations> = {
           originalPrice: '200€',
           price: '89.79€',
           period: '/mes',
-          badge: 'Oferta clientes fundadores',
           features: ['Email & SMS automatizado', 'Gestión de reputación online', 'Funnel de conversión', 'Reporte mensual'],
           cta: 'Activar mi marketing',
         },
@@ -459,36 +472,43 @@ export const translations: Record<Lang, Translations> = {
     },
     hero: {
       eyebrow: 'Websites, ads & AI automation',
-      titleA: 'Sites that load fast.',
-      titleB: 'Ads that convert.',
+      titleA: 'Your business,',
+      titleB: 'automated end to end.',
       subtitle:
-        'Inefable pairs modern web development with data-driven ad management — no fluff, no endless contracts.',
-      ctaWeb: 'I need a website',
-      ctaAds: 'I need ad management',
-      ctaCrm: 'I need a CRM',
-      ctaMarketing: 'I need marketing automation',
-      ctaRestaurant: 'I need restaurant automation',
-      aiWidget: {
-        status: 'Online',
-        title: 'AI Receptionist',
-        line: 'How can I help you today?',
-      },
+        'Inefable pairs web development, ad management and AI automation — no fluff, no endless contracts.',
+      ctaPrimary: "Let's talk about your business",
+      ctaSecondary: 'See all services',
     },
     scroll: { titleA: 'From clicks', titleB: 'to customers.' },
     growth: {
       titleA: 'Web, ads and AI working together for your business',
-      titleB: 'Commitments we actually keep',
-      flowItems: ['Web', 'Ads', 'AI'],
+      titleB: 'Automating costs less than you think',
+      flowItems: ['Web', 'Ads', 'Chatbot', 'Voice'],
       flowTarget: 'Your business',
       stats: [
-        { value: 24, suffix: 'h', label: 'response time', desc: "We'll get back to you within 24 business hours." },
-        { value: 3, label: 'revision rounds', desc: 'Included in every project, at no extra cost.' },
-        { value: 100, suffix: '%', label: 'remote, any country', desc: 'We work with clients anywhere in the world, no exceptions.' },
+        {
+          value: 97,
+          suffix: '%',
+          label: 'less than a receptionist',
+          desc: 'AI Receptionist: €49.79/mo vs. ~€2,246/mo average cost of a receptionist in Spain.',
+        },
+        {
+          value: 98,
+          suffix: '%',
+          label: 'less than customer support',
+          desc: 'AI Chatbot: €24.79/mo vs. ~€2,100/mo average cost of a customer support role in Spain.',
+        },
+        {
+          value: 96,
+          suffix: '%',
+          label: 'less than a community manager',
+          desc: 'Marketing Automation: €89.79/mo vs. ~€2,600/mo average cost of a community manager in Spain.',
+        },
       ],
     },
     services: {
       eyebrow: 'Services',
-      title: 'Six ways to grow',
+      title: 'Seven ways to grow',
       items: [
         {
           key: 'web',
@@ -508,16 +528,34 @@ export const translations: Record<Lang, Translations> = {
           hasPlatformIcons: true,
         },
         {
-          key: 'ai',
+          key: 'chatbot',
           number: '03',
+          title: 'AI Chatbot',
+          description: 'A text chat on your website that answers questions and captures leads — for when contact doesn\'t need to be a phone call.',
+          bullets: [
+            'Text chat, not calls',
+            'Answers on your site 24/7',
+            'Hands off to your team when needed',
+            'Try it in the bottom-right corner',
+          ],
+          cta: "Let's talk about your chatbot",
+        },
+        {
+          key: 'ai',
+          number: '04',
           title: 'AI Receptionist',
-          description: 'An AI agent that answers your business calls and messages, 24/7.',
-          bullets: ['Available 24/7', 'Books appointments', 'Answers FAQs', 'WhatsApp & phone'],
+          description: 'An AI agent that answers and directs your business calls, 24/7.',
+          bullets: [
+            'Answers your business calls',
+            'Available 24/7',
+            'Books appointments automatically',
+            'Hands off to your team when needed',
+          ],
           cta: "Let's talk about your AI receptionist",
         },
         {
           key: 'crm',
-          number: '04',
+          number: '05',
           title: 'CRM Automation',
           description:
             'Your whole sales pipeline organized and automatic, no leads lost in WhatsApp threads or loose notes.',
@@ -526,7 +564,7 @@ export const translations: Record<Lang, Translations> = {
         },
         {
           key: 'marketing',
-          number: '05',
+          number: '06',
           title: 'Marketing Automation',
           description:
             'Email, SMS and reputation running on their own, so every customer gets the right message on time.',
@@ -535,7 +573,7 @@ export const translations: Record<Lang, Translations> = {
         },
         {
           key: 'restaurant',
-          number: '06',
+          number: '07',
           title: 'Restaurant Automation',
           description:
             'QR menu connected to your POS, orders straight to the kitchen, and WhatsApp reservations — all in one system.',
@@ -602,7 +640,7 @@ export const translations: Record<Lang, Translations> = {
           originalPrice: '€600',
           price: '€299.79',
           period: 'one-time',
-          badge: 'Founding customer offer',
+          badge: 'First 20 founding customers',
           features: [
             'React + Vite + Tailwind site',
             'Up to 3 rounds of revisions',
@@ -630,7 +668,7 @@ export const translations: Record<Lang, Translations> = {
           price: '€124.79',
           period: 'one-time',
           note: "Try it right now: it's the chat in the bottom-right corner · + €24.79/mo maintenance",
-          badge: 'Founding customer offer',
+          badge: 'First 20 founding customers',
           features: [
             'Chat embedded on your own website',
             'Trained on your business content',
@@ -647,7 +685,6 @@ export const translations: Record<Lang, Translations> = {
           price: '€199.79',
           period: 'one-time',
           note: '+ €49.79/mo maintenance · Less than 10% of the cost of a human receptionist',
-          badge: 'Founding customer offer',
           features: [
             'Answers your business calls',
             'Available 24/7',
@@ -664,7 +701,6 @@ export const translations: Record<Lang, Translations> = {
           price: '€249.79',
           period: 'one-time',
           note: '+ €49.79/mo automation and support',
-          badge: 'Founding customer offer',
           features: [
             'CRM implementation',
             'Migration of existing data',
@@ -680,7 +716,6 @@ export const translations: Record<Lang, Translations> = {
           originalPrice: '€200',
           price: '€89.79',
           period: '/mo',
-          badge: 'Founding customer offer',
           features: ['Automated email & SMS', 'Online reputation management', 'Conversion funnel', 'Monthly reporting'],
           cta: 'Activate my marketing',
         },
