@@ -2,8 +2,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { Resend } from 'resend'
 import { getClientIp, isRateLimited } from './_lib/rateLimit'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
 const RATE_LIMIT_MAX = 5
 
@@ -91,6 +89,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { label: serviceLabel } = getServiceLabel(service)
 
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
       from: 'Inefable <leads@inefable.es>',
       to: [process.env.CONTACT_EMAIL ?? 'hola@inefable.es'],
