@@ -2,8 +2,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Anthropic from '@anthropic-ai/sdk'
 import { getClientIp, isRateLimited } from './_lib/rateLimit'
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-
 // Fast + cheap by default; swap to 'claude-sonnet-5' for higher quality replies.
 const MODEL = 'claude-haiku-4-5-20251001'
 
@@ -125,6 +123,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const response = await anthropic.messages.create({
       model: MODEL,
       max_tokens: 1000,
