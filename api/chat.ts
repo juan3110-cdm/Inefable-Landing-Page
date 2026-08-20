@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import Anthropic from '@anthropic-ai/sdk'
-import { getClientIp, isRateLimited } from './_lib/rateLimit'
+import Anthropic, { APIError } from '@anthropic-ai/sdk'
+import { getClientIp, isRateLimited } from './_lib/rateLimit.js'
 
 // Fast + cheap by default; swap to 'claude-sonnet-5' for higher quality replies.
 const MODEL = 'claude-haiku-4-5-20251001'
@@ -139,7 +139,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json({ reply })
   } catch (err) {
-    console.error('[chat] Anthropic error:', err)
-    return res.status(500).json({ error: 'Something went wrong. Please try again.' })
+    if (err instanceof APIError) {
+      console.error(`[chat] Anthropic API error — status=${err.status} type=${err.type}:`, err.message, err.error)
+
+      if (err.status === 401 || err.status === 403) {
+        return res.status(500).json({ error: 'Chat service is misconfigured. Please email us at hola@inefable.agency.' })
+      }
+      if (err.status === 404) {
+        return res.status(500).json({ error: 'Chat model is unavailable right now. Please email us at hola@inefable.agency.' })
+      }
+      if (err.status === 429) {
+        return res.status(429).json({ error: 'The assistant is receiving too many requests. Please try again in a moment.' })
+      }
+      return res.status(502).json({ error: 'Chat service is temporarily unavailable. Please try again or email us at hola@inefable.agency.' })
+    }
+
+    console.error('[chat] Unexpected error:', err)
+    return res.status(500).json({ error: 'Something went wrong. Please try again or email us at hola@inefable.agency.' })
   }
 }
