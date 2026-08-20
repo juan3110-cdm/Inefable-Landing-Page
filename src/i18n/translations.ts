@@ -54,6 +54,23 @@ export interface FaqItem {
   a: string
 }
 
+export interface LiveDemoTab {
+  key: 'call' | 'lead' | 'campaign'
+  icon: string
+  label: string
+  sublabel: string
+}
+
+export interface LiveDemoBubble {
+  speaker: string
+  text: string
+}
+
+export interface LiveDemoColumn {
+  label: string
+  status: string
+}
+
 export interface Translations {
   pageTitle: string
   metaDescription: string
@@ -76,6 +93,40 @@ export interface Translations {
     ctaSecondary: string
   }
   scroll: { titleA: string; titleB: string }
+  live: {
+    eyebrow: string
+    titleA: string
+    titleB: string
+    subtitle: string
+    idleHint: string
+    tabs: LiveDemoTab[]
+    call: {
+      liveLabel: string
+      bubbles: LiveDemoBubble[]
+      calendarLabel: string
+      bookedDay: string
+      bookedConfirm: string
+      missedCalls: string
+      waiting: string
+    }
+    lead: {
+      intro: string
+      leadName: string
+      columns: LiveDemoColumn[]
+    }
+    campaign: {
+      cpaLabel: string
+      leadsLabel: string
+      spendLabel: string
+      cpaBefore: string
+      cpaAfter: string
+      leadsBefore: string
+      leadsAfter: string
+      spendBefore: string
+      spendAfter: string
+      chartCaption: string
+    }
+  }
   growth: {
     titleA: string
     titleB: string
@@ -209,6 +260,52 @@ export const translations: Record<Lang, Translations> = {
       ctaSecondary: 'Ver todos los servicios',
     },
     scroll: { titleA: 'De clics', titleB: 'a clientes.' },
+    live: {
+      eyebrow: 'Pruébalo',
+      titleA: 'Toca y verás',
+      titleB: 'nada es una maqueta.',
+      subtitle: 'Tres piezas reales del sistema. Pulsa un botón y mira cómo responde.',
+      idleHint: 'Pulsa un botón arriba para ver el sistema en acción.',
+      tabs: [
+        { key: 'call', icon: '☎', label: 'Llamada entrante', sublabel: 'Recepcionista IA por voz' },
+        { key: 'lead', icon: '◎', label: 'Nuevo lead', sublabel: 'CRM y automatización' },
+        { key: 'campaign', icon: '↗', label: 'Campaña', sublabel: 'Gestión de Meta / Google Ads' },
+      ],
+      call: {
+        liveLabel: 'Llamada en curso',
+        bubbles: [
+          { speaker: 'IA', text: 'Buenas tardes, gracias por llamar. ¿En qué puedo ayudarte?' },
+          { speaker: 'Cliente', text: 'Hola, quisiera pedir una cita para el jueves.' },
+          { speaker: 'IA', text: 'Claro. Tengo un hueco el jueves a las 11:30, ¿te viene bien?' },
+        ],
+        calendarLabel: 'Calendario',
+        bookedDay: 'Jueves · 11:30',
+        bookedConfirm: 'Cita agendada ✓',
+        missedCalls: '0 llamadas perdidas hoy',
+        waiting: 'Esperando a que la IA confirme el hueco…',
+      },
+      lead: {
+        intro: 'Lead entrante desde el formulario de la web → se mueve solo por el pipeline.',
+        leadName: 'María G.',
+        columns: [
+          { label: 'Nuevo', status: 'Formulario recibido' },
+          { label: 'Contactado', status: 'WhatsApp enviado ✓' },
+          { label: 'Agendado', status: 'Cita confirmada ✓' },
+        ],
+      },
+      campaign: {
+        cpaLabel: 'CPA',
+        leadsLabel: 'Leads / semana',
+        spendLabel: 'Gasto optimizado',
+        cpaBefore: '24,50€',
+        cpaAfter: '9,20€',
+        leadsBefore: '19',
+        leadsAfter: '38',
+        spendBefore: '0€',
+        spendAfter: '620€',
+        chartCaption: 'CPA por semana, últimas 8 semanas gestionadas',
+      },
+    },
     growth: {
       titleA: 'Web, ads e IA trabajando juntos por tu negocio',
       titleB: 'Automatizar cuesta menos de lo que crees',
@@ -656,6 +753,52 @@ export const translations: Record<Lang, Translations> = {
       ctaSecondary: 'See all services',
     },
     scroll: { titleA: 'From clicks', titleB: 'to customers.' },
+    live: {
+      eyebrow: 'Try it',
+      titleA: 'Touch and see —',
+      titleB: 'nothing here is a mockup.',
+      subtitle: 'Three real pieces of the system. Press a button and watch it respond.',
+      idleHint: 'Press a button above to see the system in action.',
+      tabs: [
+        { key: 'call', icon: '☎', label: 'Incoming call', sublabel: 'AI voice receptionist' },
+        { key: 'lead', icon: '◎', label: 'New lead', sublabel: 'CRM and automation' },
+        { key: 'campaign', icon: '↗', label: 'Campaign', sublabel: 'Meta / Google Ads management' },
+      ],
+      call: {
+        liveLabel: 'Call in progress',
+        bubbles: [
+          { speaker: 'AI', text: 'Good afternoon, thanks for calling. How can I help you?' },
+          { speaker: 'Client', text: "Hi, I'd like to book an appointment for Thursday." },
+          { speaker: 'AI', text: 'Sure. I have an opening Thursday at 11:30, does that work?' },
+        ],
+        calendarLabel: 'Calendar',
+        bookedDay: 'Thursday · 11:30',
+        bookedConfirm: 'Appointment booked ✓',
+        missedCalls: '0 missed calls today',
+        waiting: 'Waiting for the AI to confirm the slot…',
+      },
+      lead: {
+        intro: 'Lead coming in from the website form → moves through the pipeline on its own.',
+        leadName: 'Maria G.',
+        columns: [
+          { label: 'New', status: 'Form received' },
+          { label: 'Contacted', status: 'WhatsApp sent ✓' },
+          { label: 'Booked', status: 'Appointment confirmed ✓' },
+        ],
+      },
+      campaign: {
+        cpaLabel: 'CPA',
+        leadsLabel: 'Leads / week',
+        spendLabel: 'Optimized spend',
+        cpaBefore: '€24.50',
+        cpaAfter: '€9.20',
+        leadsBefore: '19',
+        leadsAfter: '38',
+        spendBefore: '€0',
+        spendAfter: '€620',
+        chartCaption: 'CPA per week, last 8 managed weeks',
+      },
+    },
     growth: {
       titleA: 'Web, ads and AI working together for your business',
       titleB: 'Automating costs less than you think',

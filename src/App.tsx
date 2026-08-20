@@ -1,6 +1,7 @@
 import { LanguageProvider } from './hooks/useTranslation'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import LiveDemo from './components/LiveDemo'
 import ScrollShowcase from './components/ScrollShowcase'
 import Services from './components/Services'
 import GrowthSection from './components/GrowthSection'
@@ -23,6 +24,7 @@ function App() {
         <Header />
         <main>
           <Hero />
+          <LiveDemo />
           <ScrollShowcase />
           <Services />
           <GrowthSection />
