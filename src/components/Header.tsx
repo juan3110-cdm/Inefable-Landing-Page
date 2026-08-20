@@ -3,49 +3,64 @@ import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from '../hooks/useTranslation'
 import type { Lang } from '../i18n/translations'
 import Logo from './ui/Logo'
+import AnnouncementBar from './AnnouncementBar'
 
 const NAV_LINKS = [
   { key: 'services' as const, href: '#servicios' },
+  { key: 'sectors' as const, href: '#sectores' },
   { key: 'why' as const, href: '#porque' },
   { key: 'process' as const, href: '#proceso' },
   { key: 'pricing' as const, href: '#tarifas' },
+  { key: 'faq' as const, href: '#faq' },
   { key: 'contact' as const, href: '#contacto' },
 ]
 
 export default function Header() {
   const { t, lang, setLang } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
-  const barRef = useRef<HTMLDivElement>(null)
-  const [barHeight, setBarHeight] = useState(63)
+  const stackRef = useRef<HTMLDivElement>(null)
+  const [stackHeight, setStackHeight] = useState(63)
 
   useEffect(() => {
+    const el = stackRef.current
+    if (!el) return
+    const measure = () => setStackHeight(el.offsetHeight)
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
     const onResize = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false)
-      if (barRef.current) setBarHeight(barRef.current.offsetHeight)
+      if (window.innerWidth >= 1024) setMenuOpen(false)
     }
-    onResize()
     window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', onResize)
+    }
   }, [])
 
   const toggleLang = () => setLang(lang === 'es' ? 'en' : 'es')
 
   return (
     <>
-      <header
+      <div
+        ref={stackRef}
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
           zIndex: 50,
-          backdropFilter: 'blur(16px)',
-          background: 'rgba(7,7,11,.85)',
-          borderBottom: '1px solid var(--color-border-soft)',
         }}
       >
+        <AnnouncementBar />
+        <header
+          style={{
+            backdropFilter: 'blur(16px)',
+            background: 'rgba(7,7,11,.85)',
+            borderBottom: '1px solid var(--color-border-soft)',
+          }}
+        >
         <div
-          ref={barRef}
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr auto 1fr',
@@ -55,7 +70,7 @@ export default function Header() {
           }}
         >
           {/* Desktop nav */}
-      <nav className="hidden md:flex items-center gap-3 flex-wrap justify-self-start">
+      <nav className="hidden lg:flex items-center gap-3 flex-wrap justify-self-start">
         {NAV_LINKS.map(({ key, href }) => (
           <a
             key={key}
@@ -73,7 +88,7 @@ export default function Header() {
       </a>
 
       {/* Right: lang selector + CTA */}
-      <div className="hidden md:flex items-center gap-3 justify-self-end flex-wrap">
+      <div className="hidden lg:flex items-center gap-3 justify-self-end flex-wrap">
         <LangToggle lang={lang} onToggle={toggleLang} />
         <a
           href="#contacto"
@@ -92,7 +107,7 @@ export default function Header() {
       </div>
 
       {/* Mobile: lang + hamburger */}
-      <div className="flex md:hidden items-center gap-3 justify-self-end col-start-3">
+      <div className="flex lg:hidden items-center gap-3 justify-self-end col-start-3">
         <LangToggle lang={lang} onToggle={toggleLang} />
         <button
           onClick={() => setMenuOpen((v) => !v)}
@@ -160,8 +175,9 @@ export default function Header() {
             </motion.div>
           )}
         </AnimatePresence>
-      </header>
-      <div style={{ height: barHeight }} />
+        </header>
+      </div>
+      <div style={{ height: stackHeight }} />
     </>
   )
 }

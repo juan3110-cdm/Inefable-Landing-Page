@@ -34,6 +34,26 @@ export interface PricingPlan {
   cta: string
 }
 
+export interface SectorItem {
+  key: string
+  label: string
+  problem: string
+  bullets: string[]
+  highlights: string[]
+}
+
+export interface Testimonial {
+  quote: string
+  name: string
+  role: string
+  initials: string
+}
+
+export interface FaqItem {
+  q: string
+  a: string
+}
+
 export interface Translations {
   pageTitle: string
   metaDescription: string
@@ -41,7 +61,9 @@ export interface Translations {
     services: string
     why: string
     process: string
+    sectors: string
     pricing: string
+    faq: string
     contact: string
     cta: string
   }
@@ -62,6 +84,22 @@ export interface Translations {
     stats: { value: number; suffix?: string; label: string; desc: string }[]
   }
   services: { eyebrow: string; title: string; items: ServiceItem[] }
+  sectors: {
+    eyebrow: string
+    titleA: string
+    titleB: string
+    subtitle: string
+    problemLabel: string
+    solutionLabel: string
+    items: SectorItem[]
+  }
+  testimonials: {
+    eyebrow: string
+    titleA: string
+    titleB: string
+    subtitle: string
+    items: Testimonial[]
+  }
   why: {
     eyebrow: string
     title: string
@@ -111,6 +149,28 @@ export interface Translations {
     submit: string
     sending: string
   }
+  stack: {
+    eyebrow: string
+    titleA: string
+    titleB: string
+    subtitle: string
+    categories: Record<import('../config/stack').StackCategoryKey, string>
+  }
+  faq: {
+    eyebrow: string
+    titleA: string
+    titleB: string
+    subtitle: string
+    ctaText: string
+    ctaLink: string
+    items: FaqItem[]
+  }
+  announcement: {
+    enabled: boolean
+    text: string
+    ctaLabel: string
+    closeLabel: string
+  }
   footer: { rights: string }
   chat: {
     title: string
@@ -133,7 +193,9 @@ export const translations: Record<Lang, Translations> = {
       services: 'Servicios',
       why: 'Por qué Inefable',
       process: 'Proceso',
+      sectors: 'Sectores',
       pricing: 'Tarifas',
+      faq: 'FAQ',
       contact: 'Contacto',
       cta: 'Empecemos',
     },
@@ -248,6 +310,78 @@ export const translations: Record<Lang, Translations> = {
             'Menú QR conectado al TPV, pedidos directos a cocina y reservas por WhatsApp, todo en un mismo sistema.',
           bullets: ['Menú QR + conexión a TPV', 'Pedidos directos a cocina', 'Reservas por WhatsApp', 'Delivery propio sin comisiones'],
           cta: 'Hablemos de tu restaurante',
+        },
+      ],
+    },
+    sectors: {
+      eyebrow: 'Ejemplos por sector',
+      titleA: 'Lo que cambia',
+      titleB: 'según tu tipo de negocio',
+      subtitle: 'Cada sector tiene sus propios cuellos de botella. Así los resolvemos.',
+      problemLabel: 'El problema típico',
+      solutionLabel: 'Qué implementamos',
+      items: [
+        {
+          key: 'dental',
+          label: 'Clínicas Dentales',
+          problem: 'Recepción saturada de llamadas mientras atiende pacientes en silla, y citas que se pierden por no contestar a tiempo.',
+          bullets: ['Recepcionista IA que contesta y agenda 24/7', 'Recordatorios automáticos por WhatsApp', 'Filtro de urgencias vs. citas de rutina'],
+          highlights: ['Disponibilidad 24/7', 'Menos llamadas perdidas', 'Más citas agendadas'],
+        },
+        {
+          key: 'estetica',
+          label: 'Estética',
+          problem: 'Alto volumen de consultas por Instagram y WhatsApp que nadie responde fuera de horario.',
+          bullets: ['Chatbot que responde precios y disponibilidad al instante', 'Agenda de citas sin intervención humana', 'Seguimiento automático a quienes no reservan'],
+          highlights: ['Respuesta inmediata a consultas', 'Agenda sin intervención manual', 'Mejor conversión a cita'],
+        },
+        {
+          key: 'legal',
+          label: 'Legal',
+          problem: 'Consultas iniciales que consumen horas del abogado antes de saber si el caso vale la pena.',
+          bullets: ['Filtro automático de consultas por tipo de caso', 'Recepcionista IA que agenda primeras consultas', 'Resumen del caso listo antes de la llamada'],
+          highlights: ['Captación de leads 24/7', 'Consultas mejor filtradas', 'Más reuniones calificadas'],
+        },
+        {
+          key: 'restaurantes',
+          label: 'Restaurantes',
+          problem: 'Reservas por teléfono que se pierden en horas pico y reseñas negativas que nadie gestiona a tiempo.',
+          bullets: ['Reservas automáticas por WhatsApp y voz', 'Confirmación y recordatorio de mesas', 'Solicitud automática de reseñas post-visita'],
+          highlights: ['Reservas 24/7', 'Menos llamadas perdidas en hora pico', 'Más reseñas positivas'],
+        },
+        {
+          key: 'inmobiliarias',
+          label: 'Inmobiliarias',
+          problem: 'Leads que llegan a toda hora y se enfrían porque nadie responde en los primeros minutos.',
+          bullets: ['Chatbot que califica interés y presupuesto al instante', 'Agenda automática de visitas a propiedades', 'Seguimiento programado a leads fríos'],
+          highlights: ['Respuesta inmediata a cada lead', 'Menos leads que se enfrían', 'Más visitas agendadas'],
+        },
+        {
+          key: 'ecommerce',
+          label: 'E-commerce',
+          problem: 'Preguntas repetitivas sobre pedidos y envíos que saturan soporte y retrasan ventas.',
+          bullets: ['Chatbot que resuelve dudas de pedidos al instante', 'Recuperación automática de carritos abandonados', 'Integración con tu plataforma de pagos'],
+          highlights: ['Soporte 24/7 automatizado', 'Menos tickets manuales', 'Recupera carritos abandonados'],
+        },
+      ],
+    },
+    testimonials: {
+      eyebrow: 'Clientes',
+      titleA: 'Lo que dicen',
+      titleB: 'quienes ya trabajan con nosotros',
+      subtitle: 'Resultados reales, en sus propias palabras.',
+      items: [
+        {
+          quote: 'Las campañas de Meta y Google las llevan ellos; nosotros solo vemos el reporte semanal y los resultados.',
+          name: 'Vital Club',
+          role: 'Cliente',
+          initials: 'VC',
+        },
+        {
+          quote: 'La web quedó lista rápido y sin vueltas. Cada ronda de cambios se aplicó tal como la pedimos.',
+          name: 'Proyecto Martí',
+          role: 'Cliente',
+          initials: 'PM',
         },
       ],
     },
@@ -445,6 +579,46 @@ export const translations: Record<Lang, Translations> = {
       submit: 'Enviar',
       sending: 'Enviando…',
     },
+    stack: {
+      eyebrow: 'El stack',
+      titleA: 'Construimos con las mismas herramientas',
+      titleB: 'que usan las empresas grandes',
+      subtitle: 'Tecnología probada, no experimentos.',
+      categories: {
+        ai: 'IA',
+        automation: 'Automatización',
+        frontend: 'Frontend',
+        backend: 'Backend',
+        deploy: 'Deploy',
+        voice: 'Voz',
+        ads: 'Ads',
+        payments: 'Pagos',
+      },
+    },
+    faq: {
+      eyebrow: 'Preguntas frecuentes',
+      titleA: 'Lo que nos preguntan',
+      titleB: 'antes de empezar',
+      subtitle: 'Respuestas directas, sin rodeos.',
+      ctaText: '¿Otra pregunta? Escríbenos.',
+      ctaLink: 'Ir a contacto',
+      items: [
+        { q: '¿Cuánto tarda en estar funcionando?', a: 'Depende del servicio: un chatbot o recepcionista IA puede estar activo en 1-2 semanas. Un sitio web, en 2-3 semanas según el alcance.' },
+        { q: '¿Necesito tener conocimientos técnicos?', a: 'No. Nosotros configuramos, integramos y probamos todo. Tú solo apruebas el resultado antes de que salga en vivo.' },
+        { q: '¿Qué pasa si la IA no sabe responder algo?', a: 'Se define un protocolo claro: deriva la conversación a un humano o toma el dato de contacto para que alguien de tu equipo siga después.' },
+        { q: '¿Se integra con las herramientas que ya uso?', a: 'En la mayoría de los casos sí — calendarios, CRMs, WhatsApp Business y plataformas de pago son integraciones habituales.' },
+        { q: '¿Cómo se cobra: pago único o mensualidad?', a: 'Depende del servicio. El desarrollo web es pago único con rondas de corrección incluidas; ads e IA llevan una cuota mensual de gestión o mantenimiento.' },
+        { q: '¿Puedo empezar con un solo servicio y ampliar después?', a: 'Sí, de hecho es lo más común. Muchos clientes empiezan con un recepcionista IA o su web, y añaden ads o automatización más adelante.' },
+        { q: '¿Los datos de mis clientes están seguros?', a: 'Sí. Trabajamos con proveedores que cumplen estándares de seguridad reconocidos y no compartimos tus datos con terceros.' },
+        { q: '¿Qué pasa si quiero cancelar?', a: 'Los servicios mensuales no tienen permanencia forzosa. Puedes cancelar el mantenimiento o la gestión cuando lo necesites.' },
+      ],
+    },
+    announcement: {
+      enabled: true,
+      text: 'Oferta clientes fundadores — primeros 20, plazas limitadas',
+      ctaLabel: 'Ver oferta',
+      closeLabel: 'Cerrar aviso',
+    },
     footer: { rights: '© 2026 Inefable. Todos los derechos reservados.' },
     chat: {
       title: 'Asistente Inefable',
@@ -466,7 +640,9 @@ export const translations: Record<Lang, Translations> = {
       services: 'Services',
       why: 'Why Inefable',
       process: 'Process',
+      sectors: 'Sectors',
       pricing: 'Pricing',
+      faq: 'FAQ',
       contact: 'Contact',
       cta: "Let's start",
     },
@@ -579,6 +755,78 @@ export const translations: Record<Lang, Translations> = {
             'QR menu connected to your POS, orders straight to the kitchen, and WhatsApp reservations — all in one system.',
           bullets: ['QR menu + POS integration', 'Direct-to-kitchen orders', 'WhatsApp reservations', 'Zero-commission delivery'],
           cta: "Let's talk about your restaurant",
+        },
+      ],
+    },
+    sectors: {
+      eyebrow: 'Examples by sector',
+      titleA: 'What changes',
+      titleB: 'depending on your type of business',
+      subtitle: 'Every sector has its own bottlenecks. Here\'s how we solve them.',
+      problemLabel: 'The typical problem',
+      solutionLabel: "What we implement",
+      items: [
+        {
+          key: 'dental',
+          label: 'Dental Clinics',
+          problem: 'Front desk swamped with calls while attending chairside patients, and appointments lost because no one answered in time.',
+          bullets: ['AI receptionist that answers and books 24/7', 'Automatic WhatsApp reminders', 'Filters urgent cases from routine appointments'],
+          highlights: ['24/7 availability', 'Fewer missed calls', 'More appointments booked'],
+        },
+        {
+          key: 'estetica',
+          label: 'Aesthetics',
+          problem: 'High volume of Instagram and WhatsApp inquiries that no one answers outside business hours.',
+          bullets: ['Chatbot that answers pricing and availability instantly', 'Appointment booking with no human involved', 'Automatic follow-up with people who don\'t book'],
+          highlights: ['Instant response to inquiries', 'Booking with no manual work', 'Better inquiry-to-booking rate'],
+        },
+        {
+          key: 'legal',
+          label: 'Legal',
+          problem: 'Initial consultations that eat hours of a lawyer\'s time before knowing if the case is even worth taking.',
+          bullets: ['Automatic filtering of inquiries by case type', 'AI receptionist that books first consultations', 'Case summary ready before the call'],
+          highlights: ['24/7 lead capture', 'Better-filtered inquiries', 'More qualified meetings'],
+        },
+        {
+          key: 'restaurantes',
+          label: 'Restaurants',
+          problem: 'Phone reservations lost during peak hours, and negative reviews nobody manages in time.',
+          bullets: ['Automatic reservations via WhatsApp and voice', 'Table confirmation and reminders', 'Automatic review requests after the visit'],
+          highlights: ['24/7 reservations', 'Fewer missed calls at peak hours', 'More positive reviews'],
+        },
+        {
+          key: 'inmobiliarias',
+          label: 'Real Estate',
+          problem: 'Leads arriving around the clock that go cold because no one responds in the first few minutes.',
+          bullets: ['Chatbot that qualifies interest and budget instantly', 'Automatic booking of property viewings', 'Scheduled follow-up with cold leads'],
+          highlights: ['Instant response to every lead', 'Fewer leads going cold', 'More viewings booked'],
+        },
+        {
+          key: 'ecommerce',
+          label: 'E-commerce',
+          problem: 'Repetitive order and shipping questions that overwhelm support and slow down sales.',
+          bullets: ['Chatbot that resolves order questions instantly', 'Automatic abandoned-cart recovery', 'Integration with your payment platform'],
+          highlights: ['24/7 automated support', 'Fewer manual tickets', 'Recovers abandoned carts'],
+        },
+      ],
+    },
+    testimonials: {
+      eyebrow: 'Clients',
+      titleA: 'What the people',
+      titleB: 'already working with us say',
+      subtitle: 'Real results, in their own words.',
+      items: [
+        {
+          quote: 'They run the Meta and Google campaigns; we just see the weekly report and the results.',
+          name: 'Vital Club',
+          role: 'Client',
+          initials: 'VC',
+        },
+        {
+          quote: 'The site was ready fast, no back-and-forth. Every round of changes was applied exactly as we asked.',
+          name: 'Proyecto Martí',
+          role: 'Client',
+          initials: 'PM',
         },
       ],
     },
@@ -775,6 +1023,46 @@ export const translations: Record<Lang, Translations> = {
       success: { title: 'Got it!', body: "Thanks for reaching out. We'll be in touch shortly." },
       submit: 'Send',
       sending: 'Sending…',
+    },
+    stack: {
+      eyebrow: 'The stack',
+      titleA: 'We build with the same tools',
+      titleB: 'that large companies use',
+      subtitle: 'Proven technology, not experiments.',
+      categories: {
+        ai: 'AI',
+        automation: 'Automation',
+        frontend: 'Frontend',
+        backend: 'Backend',
+        deploy: 'Deploy',
+        voice: 'Voice',
+        ads: 'Ads',
+        payments: 'Payments',
+      },
+    },
+    faq: {
+      eyebrow: 'Frequently asked questions',
+      titleA: 'What people ask us',
+      titleB: 'before getting started',
+      subtitle: 'Direct answers, no runaround.',
+      ctaText: 'Another question? Reach out.',
+      ctaLink: 'Go to contact',
+      items: [
+        { q: 'How long until it\'s up and running?', a: 'Depends on the service: a chatbot or AI receptionist can be live in 1-2 weeks. A website, in 2-3 weeks depending on scope.' },
+        { q: 'Do I need technical knowledge?', a: 'No. We configure, integrate and test everything. You just approve the result before it goes live.' },
+        { q: "What happens if the AI can't answer something?", a: 'A clear protocol is set up: it hands the conversation off to a human, or takes contact details so someone on your team can follow up.' },
+        { q: 'Does it integrate with the tools I already use?', a: 'In most cases, yes — calendars, CRMs, WhatsApp Business and payment platforms are common integrations.' },
+        { q: 'How does billing work: one-time or monthly?', a: 'Depends on the service. Web development is one-time with revision rounds included; ads and AI carry a monthly management or maintenance fee.' },
+        { q: 'Can I start with one service and add more later?', a: "Yes, it's actually the most common path. Many clients start with an AI receptionist or their website, and add ads or automation later." },
+        { q: "Is my customers' data safe?", a: "Yes. We work with providers that meet recognized security standards and don't share your data with third parties." },
+        { q: 'What if I want to cancel?', a: "Monthly services have no forced commitment. You can cancel maintenance or management whenever you need to." },
+      ],
+    },
+    announcement: {
+      enabled: true,
+      text: 'Founding customer offer — first 20, limited spots',
+      ctaLabel: 'See offer',
+      closeLabel: 'Close announcement',
     },
     footer: { rights: '© 2026 Inefable. All rights reserved.' },
     chat: {

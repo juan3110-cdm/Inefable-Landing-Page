@@ -19,6 +19,7 @@
   --color-accent-purple: #a855f7;
   --color-accent-purple-light: #c9a9ff;
   --color-accent-gradient: linear-gradient(90deg, #2f5fe0, #a855f7);
+  --color-accent-gradient-2: linear-gradient(90deg, #a855f7, #e879f9);
 }
 
 *,
@@ -218,4 +219,25 @@ a:hover {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Scroll-triggered reveal — same easing/distance/duration as .fadeup,
+   but gated by IntersectionObserver via useReveal() instead of firing on mount. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
