@@ -1,4 +1,5 @@
 import { useTranslation } from '../hooks/useTranslation'
+import HeroFlare from './ui/HeroFlare'
 
 export default function Hero() {
   const { t } = useTranslation()
@@ -15,34 +16,7 @@ export default function Hero() {
         overflow: 'hidden',
       }}
     >
-      <div
-        style={{
-          position: 'absolute',
-          top: -120,
-          left: '8%',
-          width: 420,
-          height: 420,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(47,95,224,.45), transparent 70%)',
-          filter: 'blur(30px)',
-          animation: 'floatA 14s ease-in-out infinite',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: -160,
-          right: '6%',
-          width: 460,
-          height: 460,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(168,85,247,.4), transparent 70%)',
-          filter: 'blur(30px)',
-          animation: 'floatB 16s ease-in-out infinite',
-          pointerEvents: 'none',
-        }}
-      />
+      <HeroFlare />
 
       <div
         className="relative z-[1] flex flex-col items-center"
