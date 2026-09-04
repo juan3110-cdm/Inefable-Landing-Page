@@ -92,7 +92,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { error } = await resend.emails.send({
-      from: 'Inefable <leads@inefable.es>',
+      // TODO: switch to a verified domain (e.g. leads@inefable.agency) once
+      // one is added and verified at https://resend.com/domains — until
+      // then, onboarding@resend.dev is Resend's no-verification-required
+      // sandbox sender, and only works because CONTACT_EMAIL is the same
+      // inbox that owns this Resend account.
+      from: 'Inefable <onboarding@resend.dev>',
       to: [process.env.CONTACT_EMAIL ?? 'inefableia.help@gmail.com'],
       replyTo: email.trim(),
       subject: `[${serviceLabel}] Nuevo lead — ${name.trim()}`,
