@@ -24,7 +24,7 @@ CÓMO TRABAJAMOS (6 etapas): 1) Confirmamos el pago. 2) Investigamos tu negocio 
 con tu feedback (hasta 3 rondas incluidas). 6) Publicamos y entregamos: la web es tuya.
 
 PAGO: únicamente por transferencia bancaria.
-CONTACTO: hola@inefable.agency
+CONTACTO: inefableia.help@gmail.com
 
 ESTILO:
 - Responde en el idioma del usuario (por defecto, español).
@@ -79,12 +79,12 @@ function basicReply(messages: ChatMessage[]): string {
   }
   if (/contact|hablar|propuesta|presupuesto|email|correo|proposal|quote/.test(last)) {
     return en
-      ? 'You can reach the team at hola@inefable.agency, or fill out the contact form below and we\'ll get back to you within 24h.'
-      : 'Puedes escribir al equipo a hola@inefable.agency, o dejar tus datos en el formulario de contacto de abajo y te respondemos en menos de 24h.'
+      ? 'You can reach the team at inefableia.help@gmail.com, or fill out the contact form below and we\'ll get back to you within 24h.'
+      : 'Puedes escribir al equipo a inefableia.help@gmail.com, o dejar tus datos en el formulario de contacto de abajo y te respondemos en menos de 24h.'
   }
   return en
-    ? "Thanks for reaching out! I'm running in basic mode right now, but I can point you to hola@inefable.agency or the contact form below for anything specific."
-    : '¡Gracias por escribir! Ahora mismo estoy en modo básico, pero puedes escribir a hola@inefable.agency o dejar tus datos en el formulario de contacto de abajo para lo que necesites.'
+    ? "Thanks for reaching out! I'm running in basic mode right now, but I can point you to inefableia.help@gmail.com or the contact form below for anything specific."
+    : '¡Gracias por escribir! Ahora mismo estoy en modo básico, pero puedes escribir a inefableia.help@gmail.com o dejar tus datos en el formulario de contacto de abajo para lo que necesites.'
 }
 
 function isValidMessages(value: unknown): value is ChatMessage[] {
@@ -143,18 +143,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error(`[chat] Anthropic API error — status=${err.status} type=${err.type}:`, err.message, err.error)
 
       if (err.status === 401 || err.status === 403) {
-        return res.status(500).json({ error: 'Chat service is misconfigured. Please email us at hola@inefable.agency.' })
+        return res.status(500).json({ error: 'Chat service is misconfigured. Please email us at inefableia.help@gmail.com.' })
       }
       if (err.status === 404) {
-        return res.status(500).json({ error: 'Chat model is unavailable right now. Please email us at hola@inefable.agency.' })
+        return res.status(500).json({ error: 'Chat model is unavailable right now. Please email us at inefableia.help@gmail.com.' })
       }
       if (err.status === 429) {
         return res.status(429).json({ error: 'The assistant is receiving too many requests. Please try again in a moment.' })
       }
-      return res.status(502).json({ error: 'Chat service is temporarily unavailable. Please try again or email us at hola@inefable.agency.' })
+      return res.status(502).json({ error: 'Chat service is temporarily unavailable. Please try again or email us at inefableia.help@gmail.com.' })
     }
 
     console.error('[chat] Unexpected error:', err)
-    return res.status(500).json({ error: 'Something went wrong. Please try again or email us at hola@inefable.agency.' })
+    return res.status(500).json({ error: 'Something went wrong. Please try again or email us at inefableia.help@gmail.com.' })
   }
 }

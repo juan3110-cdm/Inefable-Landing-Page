@@ -92,7 +92,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
       from: 'Inefable <leads@inefable.es>',
-      to: [process.env.CONTACT_EMAIL ?? 'hola@inefable.es'],
+      to: [process.env.CONTACT_EMAIL ?? 'inefableia.help@gmail.com'],
       replyTo: email.trim(),
       subject: `[${serviceLabel}] Nuevo lead — ${name.trim()}`,
       html: buildHtml(req.body as Record<string, string>),
