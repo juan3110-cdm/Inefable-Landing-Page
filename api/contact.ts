@@ -91,7 +91,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'Inefable <leads@inefable.es>',
       to: [process.env.CONTACT_EMAIL ?? 'inefableia.help@gmail.com'],
       replyTo: email.trim(),
@@ -99,9 +99,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       html: buildHtml(req.body as Record<string, string>),
     })
 
+    // The Resend SDK does NOT throw on API-level failures (unverified
+    // domain, invalid recipient, etc.) — it resolves with { error } instead,
+    // so this has to be checked explicitly or a failed send silently
+    // reports success to the client.
+    if (error) {
+      console.error(`[contact] Resend API error — name=${error.name}:`, error.message)
+      return res.status(502).json({ error: 'Failed to send email' })
+    }
+
     return res.status(200).json({ success: true })
   } catch (err) {
-    console.error('[contact] Resend error:', err)
+    console.error('[contact] Unexpected error:', err)
     return res.status(500).json({ error: 'Failed to send email' })
   }
 }
