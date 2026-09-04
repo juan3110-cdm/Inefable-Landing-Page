@@ -1,7 +1,7 @@
 export type Lang = 'es' | 'en'
 
 export interface ServiceItem {
-  key: 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
+  key: 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant' | 'appdev'
   number: string
   title: string
   description: string
@@ -22,12 +22,12 @@ export interface ProcessTrack {
 }
 
 export interface PricingPlan {
-  key: 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
+  key: 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant' | 'appdev'
   name: string
   desc: string
   originalPrice?: string
-  price: string
-  period: string
+  price?: string
+  period?: string
   note?: string
   badge?: string
   features: string[]
@@ -177,6 +177,7 @@ export interface Translations {
       crm: string
       marketing: string
       restaurant: string
+      appdev: string
     }
     fields: {
       name: string
@@ -334,7 +335,7 @@ export const translations: Record<Lang, Translations> = {
     },
     services: {
       eyebrow: 'Servicios',
-      title: 'Siete formas de crecer',
+      title: 'Ocho formas de crecer',
       items: [
         {
           key: 'web',
@@ -407,6 +408,14 @@ export const translations: Record<Lang, Translations> = {
             'Menú QR conectado al TPV, pedidos directos a cocina y reservas por WhatsApp, todo en un mismo sistema.',
           bullets: ['Menú QR + conexión a TPV', 'Pedidos directos a cocina', 'Reservas por WhatsApp', 'Delivery propio sin comisiones'],
           cta: 'Hablemos de tu restaurante',
+        },
+        {
+          key: 'appdev',
+          number: '08',
+          title: 'Desarrollo de Apps',
+          description: 'Apps móviles a medida para iOS y Android, del diseño a la publicación en las tiendas.',
+          bullets: ['iOS y Android', 'Diseño e implementación a medida', 'Integración con tu backend o CRM', 'Publicación en App Store y Google Play'],
+          cta: 'Hablemos de tu app',
         },
       ],
     },
@@ -634,6 +643,19 @@ export const translations: Record<Lang, Translations> = {
           ],
           cta: 'Pedir cotización',
         },
+        {
+          key: 'appdev',
+          name: 'Desarrollo de Apps',
+          desc: 'App móvil a medida para iOS y Android.',
+          note: 'El precio depende del alcance del proyecto — te lo confirmamos en la consulta.',
+          features: [
+            'iOS y Android',
+            'Diseño e implementación a medida',
+            'Integración con tu backend o CRM',
+            'Publicación en App Store y Google Play',
+          ],
+          cta: 'Pedir cotización',
+        },
       ],
       quote: {
         title: '¿Necesitas algo distinto?',
@@ -653,6 +675,7 @@ export const translations: Record<Lang, Translations> = {
         crm: 'CRM',
         marketing: 'Marketing',
         restaurant: 'Restaurantes',
+        appdev: 'Desarrollo de Apps',
       },
       fields: {
         name: 'Nombre',
@@ -827,7 +850,7 @@ export const translations: Record<Lang, Translations> = {
     },
     services: {
       eyebrow: 'Services',
-      title: 'Seven ways to grow',
+      title: 'Eight ways to grow',
       items: [
         {
           key: 'web',
@@ -898,6 +921,14 @@ export const translations: Record<Lang, Translations> = {
             'QR menu connected to your POS, orders straight to the kitchen, and WhatsApp reservations — all in one system.',
           bullets: ['QR menu + POS integration', 'Direct-to-kitchen orders', 'WhatsApp reservations', 'Zero-commission delivery'],
           cta: "Let's talk about your restaurant",
+        },
+        {
+          key: 'appdev',
+          number: '08',
+          title: 'App Development',
+          description: 'Custom mobile apps for iOS and Android, from design to publishing on the stores.',
+          bullets: ['iOS and Android', 'Custom design and implementation', 'Integrates with your backend or CRM', 'Published on the App Store and Google Play'],
+          cta: "Let's talk about your app",
         },
       ],
     },
@@ -1125,6 +1156,19 @@ export const translations: Record<Lang, Translations> = {
           ],
           cta: 'Get a quote',
         },
+        {
+          key: 'appdev',
+          name: 'App Development',
+          desc: 'A custom mobile app for iOS and Android.',
+          note: "Price depends on project scope — we'll confirm it in the consultation.",
+          features: [
+            'iOS and Android',
+            'Custom design and implementation',
+            'Integrates with your backend or CRM',
+            'Published on the App Store and Google Play',
+          ],
+          cta: 'Get a quote',
+        },
       ],
       quote: {
         title: 'Need something different?',
@@ -1144,6 +1188,7 @@ export const translations: Record<Lang, Translations> = {
         crm: 'CRM',
         marketing: 'Marketing',
         restaurant: 'Restaurants',
+        appdev: 'App Development',
       },
       fields: {
         name: 'Name',

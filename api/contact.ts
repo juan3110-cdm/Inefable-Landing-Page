@@ -26,6 +26,7 @@ const SERVICE_LABELS: Record<string, { emoji: string; label: string }> = {
   crm: { emoji: '📇', label: 'CRM y Automatización' },
   marketing: { emoji: '📈', label: 'Marketing Automatizado' },
   restaurant: { emoji: '🍽️', label: 'Automatización para Restaurantes' },
+  appdev: { emoji: '📱', label: 'Desarrollo de Apps' },
 }
 const UNKNOWN_SERVICE = { emoji: '📩', label: 'Consulta general' }
 

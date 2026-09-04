@@ -63,17 +63,19 @@ export default function Pricing() {
               </div>
               <div style={{ color: 'var(--color-muted)', fontSize: 13 }}>{plan.desc}</div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '4px 8px' }}>
-              {plan.originalPrice && (
-                <span style={{ fontSize: 18, color: '#75708a', textDecoration: 'line-through' }}>
-                  {plan.originalPrice}
-                </span>
-              )}
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800 }}>{plan.price}</span>
-              <span style={{ color: 'var(--color-muted)', fontSize: 14 }}>{plan.period}</span>
-            </div>
+            {plan.price && (
+              <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '4px 8px' }}>
+                {plan.originalPrice && (
+                  <span style={{ fontSize: 18, color: '#75708a', textDecoration: 'line-through' }}>
+                    {plan.originalPrice}
+                  </span>
+                )}
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800 }}>{plan.price}</span>
+                <span style={{ color: 'var(--color-muted)', fontSize: 14 }}>{plan.period}</span>
+              </div>
+            )}
             {plan.note && (
-              <div style={{ fontSize: 12, color: 'var(--color-accent-purple-light)', marginTop: -12 }}>{plan.note}</div>
+              <div style={{ fontSize: 12, color: 'var(--color-accent-purple-light)', marginTop: plan.price ? -12 : 0 }}>{plan.note}</div>
             )}
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
               {plan.features.map((f) => (

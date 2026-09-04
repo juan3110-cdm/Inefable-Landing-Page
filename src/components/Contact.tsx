@@ -1,7 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react'
 import { useTranslation } from '../hooks/useTranslation'
 
-type ServiceType = 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant'
+type ServiceType = 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant' | 'appdev'
 type FormStatus = 'idle' | 'sending' | 'success' | 'error' | 'server-error'
 
 interface FormData {
@@ -57,7 +57,8 @@ export default function Contact() {
         svc === 'ai' ||
         svc === 'crm' ||
         svc === 'marketing' ||
-        svc === 'restaurant'
+        svc === 'restaurant' ||
+        svc === 'appdev'
       ) {
         setService(svc)
       }
@@ -126,6 +127,7 @@ export default function Contact() {
     { key: 'crm', label: t.contact.serviceLabels.crm },
     { key: 'marketing', label: t.contact.serviceLabels.marketing },
     { key: 'restaurant', label: t.contact.serviceLabels.restaurant },
+    { key: 'appdev', label: t.contact.serviceLabels.appdev },
   ]
 
   return (

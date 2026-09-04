@@ -9,6 +9,7 @@ const GRADIENTS: Record<string, string> = {
   crm: 'linear-gradient(160deg, rgba(45,212,191,.35), rgba(45,212,191,.05))',
   marketing: 'linear-gradient(160deg, rgba(251,146,60,.35), rgba(251,146,60,.05))',
   restaurant: 'linear-gradient(160deg, rgba(244,63,94,.35), rgba(244,63,94,.05))',
+  appdev: 'linear-gradient(160deg, rgba(56,189,248,.35), rgba(56,189,248,.05))',
 }
 
 function ServiceIcon({ svcKey }: { svcKey: string }) {
@@ -50,6 +51,14 @@ function ServiceIcon({ svcKey }: { svcKey: string }) {
         <path d="M6 3v7a2 2 0 0 0 4 0V3" />
         <path d="M8 10v11" />
         <path d="M17 3c-1.5 0-2.5 1.5-2.5 3.5S16 12 17 12v9" />
+      </svg>
+    )
+  }
+  if (svcKey === 'appdev') {
+    return (
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="6" y="2" width="12" height="20" rx="2.5" />
+        <path d="M11 18h2" />
       </svg>
     )
   }
