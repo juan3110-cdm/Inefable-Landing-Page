@@ -24,6 +24,7 @@ export default function Footer() {
         <a href="https://instagram.com/inefable.ia" target="_blank" rel="noreferrer">
           @inefable.ia
         </a>
+        <a href="mailto:inefableia.help@gmail.com">inefableia.help@gmail.com</a>
       </div>
       <div style={{ fontSize: 12, color: 'var(--color-faint)' }}>{t.footer.rights}</div>
     </footer>
