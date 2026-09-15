@@ -722,7 +722,7 @@ export const translations: Record<Lang, Translations> = {
       ctaText: '¿Otra pregunta? Escríbenos.',
       ctaLink: 'Ir a contacto',
       items: [
-        { q: '¿Cuánto tarda en estar funcionando?', a: 'Depende del servicio: un chatbot o recepcionista IA puede estar activo en 1-2 semanas. Un sitio web, en 2-3 semanas según el alcance.' },
+        { q: '¿Cuánto tarda en estar funcionando?', a: 'Depende del servicio: un chatbot o recepcionista IA puede estar activo en 1-2 semanas. Un sitio web, en 5-7 días según el alcance.' },
         { q: '¿Necesito tener conocimientos técnicos?', a: 'No. Nosotros configuramos, integramos y probamos todo. Tú solo apruebas el resultado antes de que salga en vivo.' },
         { q: '¿Qué pasa si la IA no sabe responder algo?', a: 'Se define un protocolo claro: deriva la conversación a un humano o toma el dato de contacto para que alguien de tu equipo siga después.' },
         { q: '¿Se integra con las herramientas que ya uso?', a: 'En la mayoría de los casos sí — calendarios, CRMs, WhatsApp Business y plataformas de pago son integraciones habituales.' },
@@ -1234,7 +1234,7 @@ export const translations: Record<Lang, Translations> = {
       ctaText: 'Another question? Reach out.',
       ctaLink: 'Go to contact',
       items: [
-        { q: 'How long until it\'s up and running?', a: 'Depends on the service: a chatbot or AI receptionist can be live in 1-2 weeks. A website, in 2-3 weeks depending on scope.' },
+        { q: 'How long until it\'s up and running?', a: 'Depends on the service: a chatbot or AI receptionist can be live in 1-2 weeks. A website, in 5-7 days depending on scope.' },
         { q: 'Do I need technical knowledge?', a: 'No. We configure, integrate and test everything. You just approve the result before it goes live.' },
         { q: "What happens if the AI can't answer something?", a: 'A clear protocol is set up: it hands the conversation off to a human, or takes contact details so someone on your team can follow up.' },
         { q: 'Does it integrate with the tools I already use?', a: 'In most cases, yes — calendars, CRMs, WhatsApp Business and payment platforms are common integrations.' },
