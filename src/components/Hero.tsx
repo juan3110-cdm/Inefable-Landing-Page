@@ -76,7 +76,7 @@ export default function Hero() {
           style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}
         >
           <a
-            href="#contacto"
+            href="/#contacto"
             style={{
               background: '#fff',
               color: '#0b0b12',
@@ -90,7 +90,7 @@ export default function Hero() {
             {t.hero.ctaPrimary}
           </a>
           <a
-            href="#servicios"
+            href="/#servicios"
             style={{
               background: 'rgba(255,255,255,.06)',
               color: '#fff',

@@ -30,6 +30,10 @@ export default function ClientLogos() {
                 key={`${client.name}-${i}`}
                 src={client.src}
                 alt={client.name}
+                loading="lazy"
+                decoding="async"
+                width={90}
+                height={90}
                 className="h-[90px] w-[90px] shrink-0 grayscale opacity-50 transition-all duration-500 hover:grayscale-0 hover:opacity-100"
                 style={{ borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--color-border-soft)' }}
               />
@@ -39,7 +43,15 @@ export default function ClientLogos() {
                 className="flex h-[90px] w-[180px] shrink-0 items-center justify-center grayscale opacity-50 transition-all duration-500 hover:grayscale-0 hover:opacity-100"
                 style={{ background: '#fff', border: '1px solid var(--color-border-soft)', borderRadius: 14, padding: 16 }}
               >
-                <img src={client.src} alt={client.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                <img
+                  src={client.src}
+                  alt={client.name}
+                  loading="lazy"
+                  decoding="async"
+                  width={148}
+                  height={58}
+                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                />
               </div>
             ),
           )}

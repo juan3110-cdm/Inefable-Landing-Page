@@ -1,5 +1,7 @@
-import { useState, useEffect, type FormEvent } from 'react'
+import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { useTranslation } from '../hooks/useTranslation'
+import TurnstileWidget from './TurnstileWidget'
+import { trackFormSubmit } from '../lib/analytics'
 
 type ServiceType = 'web' | 'ads' | 'chatbot' | 'ai' | 'crm' | 'marketing' | 'restaurant' | 'appdev'
 type FormStatus = 'idle' | 'sending' | 'success' | 'error' | 'server-error'
@@ -47,6 +49,8 @@ export default function Contact() {
   const [service, setService] = useState<ServiceType>('web')
   const [form, setForm] = useState<FormData>(INITIAL)
   const [status, setStatus] = useState<FormStatus>('idle')
+  const honeypotRef = useRef<HTMLInputElement>(null)
+  const turnstileTokenRef = useRef<string>('')
 
   useEffect(() => {
     const applyPrefill = (svc: string | null, message: string | null) => {
@@ -95,6 +99,10 @@ export default function Contact() {
         phone: form.phone,
         country: form.country,
         message: form.message,
+        // Honeypot: real visitors never see or fill this field. Bots that
+        // blindly fill every input trip it, and the server drops the lead.
+        company_website: honeypotRef.current?.value ?? '',
+        turnstileToken: turnstileTokenRef.current,
       }
       if (service === 'web') {
         payload.businessType = form.businessType
@@ -112,6 +120,7 @@ export default function Contact() {
       })
 
       if (!res.ok) throw new Error('Server error')
+      trackFormSubmit(service)
       setStatus('success')
       setForm(INITIAL)
     } catch {
@@ -290,6 +299,18 @@ export default function Contact() {
                 style={{ ...inputStyle, resize: 'vertical' }}
               />
             </div>
+
+            <input
+              ref={honeypotRef}
+              type="text"
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+            />
+
+            <TurnstileWidget onToken={(token) => (turnstileTokenRef.current = token)} />
 
             {status === 'error' && (
               <div style={{ color: '#ff8a8a', fontSize: 13 }}>{t.contact.error}</div>

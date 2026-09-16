@@ -60,7 +60,7 @@ export default function TechStack() {
               }}
             >
               <div style={{ width: 30, height: 30, borderRadius: 9, background: tool.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6 }}>
-                <img src={tool.logo} alt={tool.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                <img src={tool.logo} alt={tool.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
               </div>
               <span style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 11 }}>{tool.name}</span>
             </div>
@@ -99,7 +99,7 @@ export default function TechStack() {
             }}
           >
             <div style={{ width: 42, height: 42, borderRadius: 11, background: tool.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 9 }}>
-              <img src={tool.logo} alt={tool.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <img src={tool.logo} alt={tool.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 13, color: 'var(--color-muted)' }}>{tool.name}</span>
             <span style={{ position: 'absolute', top: 10, right: 12, fontFamily: 'monospace', fontSize: 10, color: 'var(--color-faint)' }}>

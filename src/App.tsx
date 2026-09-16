@@ -1,46 +1,36 @@
+import { useEffect, Suspense, lazy } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LanguageProvider } from './hooks/useTranslation'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import LiveDemo from './components/LiveDemo'
-import ScrollShowcase from './components/ScrollShowcase'
-import Services from './components/Services'
-import GrowthSection from './components/GrowthSection'
-import Sectors from './components/Sectors'
-import WhyInefable from './components/WhyInefable'
-import Process from './components/Process'
-import Testimonials from './components/Testimonials'
-import ClientLogos from './components/ClientLogos'
-import Pricing from './components/Pricing'
-import TechStack from './components/TechStack'
-import FAQ from './components/FAQ'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import ChatWidget from './components/ChatWidget'
+import LandingPage from './pages/LandingPage'
+import CookieConsent from './components/CookieConsent'
+import { initTrackingFromStoredConsent } from './lib/analytics'
+
+// Code-split the low-traffic pages so the landing page — what nearly every
+// visitor hits — doesn't ship their weight in its initial bundle.
+const AvisoLegal = lazy(() => import('./pages/legal/AvisoLegal'))
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'))
+const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function App() {
+  useEffect(() => {
+    initTrackingFromStoredConsent()
+  }, [])
+
   return (
     <LanguageProvider>
-      <div style={{ background: 'var(--color-bg)', color: 'var(--color-text)', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
-        <Header />
-        <main>
-          <Hero />
-          <LiveDemo />
-          <ScrollShowcase />
-          <Services />
-          <GrowthSection />
-          <Sectors />
-          <WhyInefable />
-          <Process />
-          <Testimonials />
-          <ClientLogos />
-          <Pricing />
-          <TechStack />
-          <FAQ />
-          <Contact />
-        </main>
-        <Footer />
-        <ChatWidget />
-      </div>
+      <BrowserRouter>
+        <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--color-bg)' }} />}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/aviso-legal" element={<AvisoLegal />} />
+            <Route path="/privacidad" element={<PrivacyPolicy />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+        <CookieConsent />
+      </BrowserRouter>
     </LanguageProvider>
   )
 }

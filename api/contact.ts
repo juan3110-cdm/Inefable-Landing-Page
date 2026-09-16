@@ -7,7 +7,11 @@ const RATE_LIMIT_MAX = 5
 
 // Real origins this endpoint should ever be called from. inefable.es is
 // deliberately not here — it currently serves an unrelated business.
-const ALLOWED_ORIGINS = ['https://inefable-landing-page.vercel.app']
+const ALLOWED_ORIGINS = [
+  'https://inefable-landing-page.vercel.app',
+  'https://inefableia.com',
+  'https://www.inefableia.com',
+]
 
 function applyCors(req: VercelRequest, res: VercelResponse) {
   const origin = req.headers.origin
@@ -34,12 +38,34 @@ function getServiceLabel(service: string | undefined) {
   return (service && SERVICE_LABELS[service]) || UNKNOWN_SERVICE
 }
 
+async function verifyTurnstile(token: string | undefined, ip: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY
+  // No secret configured yet — skip verification rather than block every
+  // submission. Set TURNSTILE_SECRET_KEY (and VITE_TURNSTILE_SITE_KEY on the
+  // client) to turn this on for real.
+  if (!secret) return true
+  if (!token) return false
+
+  try {
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+    })
+    const data = (await res.json()) as { success: boolean }
+    return data.success
+  } catch (err) {
+    console.error('[contact] Turnstile verification failed:', err)
+    return false
+  }
+}
+
 function buildHtml(data: Record<string, string>): string {
   const { emoji, label } = getServiceLabel(data.service)
   const serviceLabel = `${emoji} ${label}`
 
   const rows = Object.entries(data)
-    .filter(([k, v]) => k !== 'service' && v)
+    .filter(([k, v]) => !['service', 'company_website', 'turnstileToken'].includes(k) && v)
     .map(
       ([k, v]) => `
       <tr>
@@ -81,10 +107,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(429).json({ error: 'Too many requests. Please try again in a few minutes.' })
   }
 
-  const { name, email, service } = req.body as Record<string, string>
+  const { name, email, service, company_website: honeypot, turnstileToken } = req.body as Record<string, string>
 
   if (!name?.trim() || !email?.trim() || !service) {
     return res.status(400).json({ error: 'Missing required fields' })
+  }
+
+  // Honeypot tripped — respond as if it worked so the bot doesn't learn to
+  // avoid this field, but never actually send the email.
+  if (honeypot) {
+    return res.status(200).json({ success: true })
+  }
+
+  if (!(await verifyTurnstile(turnstileToken, ip))) {
+    return res.status(400).json({ error: 'Failed anti-spam verification' })
   }
 
   const { label: serviceLabel } = getServiceLabel(service)

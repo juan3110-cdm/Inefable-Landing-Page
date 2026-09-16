@@ -99,7 +99,7 @@ export default function FAQ() {
       <div ref={cta.ref} className={cta.className} style={{ textAlign: 'center', marginTop: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
         <p style={{ color: 'var(--color-muted)', fontSize: 14.5, margin: 0 }}>{s.ctaText}</p>
         <a
-          href="#contacto"
+          href="/#contacto"
           onClick={() => firePrefill({ message: s.ctaText })}
           style={{ background: 'var(--color-accent-gradient)', color: '#fff', fontSize: 14, fontWeight: 700, padding: '12px 24px', borderRadius: 100 }}
         >

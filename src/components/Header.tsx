@@ -6,13 +6,13 @@ import Logo from './ui/Logo'
 import AnnouncementBar from './AnnouncementBar'
 
 const NAV_LINKS = [
-  { key: 'services' as const, href: '#servicios' },
-  { key: 'sectors' as const, href: '#sectores' },
-  { key: 'why' as const, href: '#porque' },
-  { key: 'process' as const, href: '#proceso' },
-  { key: 'pricing' as const, href: '#tarifas' },
-  { key: 'faq' as const, href: '#faq' },
-  { key: 'contact' as const, href: '#contacto' },
+  { key: 'services' as const, href: '/#servicios' },
+  { key: 'sectors' as const, href: '/#sectores' },
+  { key: 'why' as const, href: '/#porque' },
+  { key: 'process' as const, href: '/#proceso' },
+  { key: 'pricing' as const, href: '/#tarifas' },
+  { key: 'faq' as const, href: '/#faq' },
+  { key: 'contact' as const, href: '/#contacto' },
 ]
 
 export default function Header() {
@@ -24,12 +24,16 @@ export default function Header() {
   useEffect(() => {
     const el = stackRef.current
     if (!el) return
-    const measure = () => setStackHeight(el.offsetHeight)
+    const measure = () => {
+      const height = el.offsetHeight
+      setStackHeight(height)
+      document.documentElement.style.setProperty('--header-offset', `${height}px`)
+    }
     measure()
     const ro = new ResizeObserver(measure)
     ro.observe(el)
     const onResize = () => {
-      if (window.innerWidth >= 1024) setMenuOpen(false)
+      if (window.innerWidth >= 1280) setMenuOpen(false)
     }
     window.addEventListener('resize', onResize)
     return () => {
@@ -70,7 +74,7 @@ export default function Header() {
           }}
         >
           {/* Desktop nav */}
-      <nav className="hidden lg:flex items-center gap-3 flex-wrap justify-self-start">
+      <nav className="hidden xl:flex items-center gap-3 flex-wrap justify-self-start">
         {NAV_LINKS.map(({ key, href }) => (
           <a
             key={key}
@@ -83,23 +87,25 @@ export default function Header() {
       </nav>
 
       {/* Logo */}
-      <a href="#" className="justify-self-center">
+      <a href="/" className="justify-self-center">
         <Logo size={32} />
       </a>
 
       {/* Right: lang selector + CTA */}
-      <div className="hidden lg:flex items-center gap-3 justify-self-end flex-wrap">
+      <div className="hidden xl:flex items-center gap-3 justify-self-end flex-wrap">
         <LangToggle lang={lang} onToggle={toggleLang} />
         <a
-          href="#contacto"
+          href="/#contacto"
           style={{
             background: 'var(--color-accent-gradient)',
             color: '#fff',
             fontSize: 13,
             fontWeight: 700,
-            padding: '9px 18px',
+            padding: '13px 20px',
             borderRadius: 100,
             whiteSpace: 'nowrap',
+            display: 'inline-flex',
+            alignItems: 'center',
           }}
         >
           {t.nav.cta}
@@ -107,11 +113,11 @@ export default function Header() {
       </div>
 
       {/* Mobile: lang + hamburger */}
-      <div className="flex lg:hidden items-center gap-3 justify-self-end col-start-3">
+      <div className="flex xl:hidden items-center gap-3 justify-self-end col-start-3">
         <LangToggle lang={lang} onToggle={toggleLang} />
         <button
           onClick={() => setMenuOpen((v) => !v)}
-          className="w-9 h-9 flex flex-col items-center justify-center gap-[6px]"
+          className="w-11 h-11 flex flex-col items-center justify-center gap-[6px]"
           style={{ borderRadius: 8 }}
           aria-label="Menú"
         >
@@ -164,7 +170,7 @@ export default function Header() {
                   </a>
                 ))}
                 <a
-                  href="#contacto"
+                  href="/#contacto"
                   onClick={() => setMenuOpen(false)}
                   className="mt-3 text-center text-sm font-bold px-4 py-3"
                   style={{ background: 'var(--color-accent-gradient)', color: '#fff', borderRadius: 100 }}
@@ -195,13 +201,15 @@ function LangToggle({ lang, onToggle }: { lang: Lang; onToggle: () => void }) {
     >
       <button
         onClick={() => lang !== 'es' && onToggle()}
+        aria-pressed={lang === 'es'}
         style={{
           border: 'none',
           background: lang === 'es' ? '#fff' : 'transparent',
           color: lang === 'es' ? '#0b0b12' : '#cfc9dd',
           fontSize: 12,
           fontWeight: 700,
-          padding: '6px 12px',
+          padding: '11px 14px',
+          minHeight: 40,
           borderRadius: 100,
           cursor: 'pointer',
           letterSpacing: '.03em',
@@ -211,13 +219,15 @@ function LangToggle({ lang, onToggle }: { lang: Lang; onToggle: () => void }) {
       </button>
       <button
         onClick={() => lang !== 'en' && onToggle()}
+        aria-pressed={lang === 'en'}
         style={{
           border: 'none',
           background: lang === 'en' ? '#fff' : 'transparent',
           color: lang === 'en' ? '#0b0b12' : '#cfc9dd',
           fontSize: 12,
           fontWeight: 700,
-          padding: '6px 12px',
+          padding: '11px 14px',
+          minHeight: 40,
           borderRadius: 100,
           cursor: 'pointer',
           letterSpacing: '.03em',

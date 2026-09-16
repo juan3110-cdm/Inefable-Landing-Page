@@ -86,7 +86,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="#contacto"
+              href="/#contacto"
               onClick={() => firePrefill({ service: plan.key })}
               style={{
                 background: 'var(--color-accent-gradient)',
@@ -119,7 +119,7 @@ export default function Pricing() {
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 19 }}>{t.pricing.quote.title}</div>
           <div style={{ color: 'var(--color-muted)', fontSize: 13, lineHeight: 1.5 }}>{t.pricing.quote.desc}</div>
           <a
-            href="#contacto"
+            href="/#contacto"
             onClick={() => firePrefill({ service: 'web' })}
             style={{
               background: 'transparent',

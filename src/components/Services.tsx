@@ -186,7 +186,7 @@ export default function Services() {
                 {svc.description}
               </p>
               <a
-                href="#contacto"
+                href="/#contacto"
                 onClick={() => firePrefill({ service: svc.key })}
                 style={{
                   background: 'transparent',

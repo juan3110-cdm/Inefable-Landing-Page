@@ -40,7 +40,7 @@ export default function AnnouncementBar() {
         }}
       >
         <a
-          href="#contacto"
+          href="/#contacto"
           onClick={() => firePrefill({ message: a.text })}
           style={{
             display: 'block',

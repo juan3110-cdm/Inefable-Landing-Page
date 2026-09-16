@@ -1,5 +1,5 @@
-import martiLogo from '../assets/clients/proyecto-marti.png'
-import vcrLogo from '../assets/clients/vcr.png'
+import martiLogo from '../assets/clients/proyecto-marti.webp'
+import vcrLogo from '../assets/clients/vcr.webp'
 
 export interface ClientLogoConfig {
   name: string

@@ -31,10 +31,13 @@ export default function ScrollShowcase() {
           </div>
           <video
             src="/video/hero-scroll.mp4"
+            poster="/video/hero-scroll-poster.jpg"
+            preload="metadata"
             autoPlay
             muted
             loop
             playsInline
+            aria-hidden="true"
             style={{ width: '100%', flex: 1, objectFit: 'cover', display: 'block' }}
           />
         </div>

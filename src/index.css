@@ -14,7 +14,10 @@
   --color-text: #f2f0f7;
   --color-muted: #b6afc8;
   --color-subtle: #8a7fb0;
-  --color-faint: #6c6484;
+  /* #807993 (not the original #6c6484) — that shade only hit 3.6:1 against
+     --color-bg, below WCAG AA's 4.5:1 for normal text, and it's used at
+     9-13px across footer/testimonial/label text sitewide. */
+  --color-faint: #807993;
   --color-accent-blue: #2f5fe0;
   --color-accent-purple: #a855f7;
   --color-accent-purple-light: #c9a9ff;
@@ -30,7 +33,10 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  /* Kept in sync with the sticky header's real height (announcement bar +
+     nav) from Header.tsx's ResizeObserver — a static value drifts whenever
+     the announcement bar is dismissed or wraps to a second line. */
+  scroll-padding-top: var(--header-offset, 80px);
 }
 
 body {
