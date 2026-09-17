@@ -4,6 +4,7 @@ import { LanguageProvider } from './hooks/useTranslation'
 import LandingPage from './pages/LandingPage'
 import CookieConsent from './components/CookieConsent'
 import { initTrackingFromStoredConsent } from './lib/analytics'
+import { SERVICE_SLUGS, type ServiceKey } from './content/serviceSlugs'
 
 // Code-split the low-traffic pages so the landing page — what nearly every
 // visitor hits — doesn't ship their weight in its initial bundle.
@@ -11,6 +12,7 @@ const AvisoLegal = lazy(() => import('./pages/legal/AvisoLegal'))
 const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'))
 const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const ServicePage = lazy(() => import('./pages/ServicePage'))
 
 function App() {
   useEffect(() => {
@@ -26,6 +28,9 @@ function App() {
             <Route path="/aviso-legal" element={<AvisoLegal />} />
             <Route path="/privacidad" element={<PrivacyPolicy />} />
             <Route path="/cookies" element={<CookiePolicy />} />
+            {(Object.entries(SERVICE_SLUGS) as [ServiceKey, string][]).map(([key, slug]) => (
+              <Route key={key} path={slug} element={<ServicePage serviceKey={key} />} />
+            ))}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

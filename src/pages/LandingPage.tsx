@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTranslation } from '../hooks/useTranslation'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import LiveDemo from '../components/LiveDemo'
@@ -22,6 +24,9 @@ import StructuredData from '../components/StructuredData'
 
 export default function LandingPage() {
   const { hash } = useLocation()
+  const { t } = useTranslation()
+
+  useDocumentHead(t.pageTitle, t.metaDescription, '/')
 
   useEffect(() => {
     if (!hash) return

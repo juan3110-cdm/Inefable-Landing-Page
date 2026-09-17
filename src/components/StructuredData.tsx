@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useTranslation } from '../hooks/useTranslation'
 import { SITE } from '../config/site'
+import { SERVICE_SLUGS, type ServiceKey } from '../content/serviceSlugs'
 
 const SCRIPT_ID = 'inefable-jsonld'
 
@@ -44,6 +45,18 @@ export default function StructuredData() {
           acceptedAnswer: { '@type': 'Answer', text: item.a },
         })),
       },
+      // One Service entity per offering so each can independently match
+      // service-specific queries ("chatbot IA para web", "gestión Google
+      // Ads Madrid"...) instead of all 8 competing under one ProfessionalService.
+      ...t.services.items.map((item) => ({
+        '@type': 'Service',
+        '@id': `${SITE.url}/#service-${item.key}`,
+        name: item.title,
+        description: item.description,
+        provider: { '@id': `${SITE.url}/#organization` },
+        areaServed: ['Madrid', 'España', 'Estados Unidos', 'Latinoamérica'],
+        url: `${SITE.url}${SERVICE_SLUGS[item.key as ServiceKey]}`,
+      })),
     ]
 
     const json = { '@context': 'https://schema.org', '@graph': graph }

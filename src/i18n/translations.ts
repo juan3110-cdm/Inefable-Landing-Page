@@ -238,7 +238,7 @@ export interface Translations {
 
 export const translations: Record<Lang, Translations> = {
   es: {
-    pageTitle: 'Inefable | Agencia Digital · Madrid',
+    pageTitle: 'Inefable | Web, Ads y Automatización con IA · Madrid',
     metaDescription:
       'Inefable — Agencia de desarrollo web, publicidad y automatización con IA en Madrid, para clientes en cualquier país.',
     nav: {
@@ -752,7 +752,7 @@ export const translations: Record<Lang, Translations> = {
   },
 
   en: {
-    pageTitle: 'Inefable | Digital Agency · Madrid',
+    pageTitle: 'Inefable | Web, Ads & AI Automation Agency · Madrid',
     metaDescription:
       'Inefable — Web development, ad management and AI automation agency based in Madrid, serving clients in any country.',
     nav: {

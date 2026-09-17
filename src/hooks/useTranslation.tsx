@@ -40,10 +40,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    const t = translations[lang]
+    // Only the html[lang] attribute belongs here — it's global. Title and
+    // meta description are per-page (see useDocumentHead), and each page
+    // component owns setting them for its own route.
     document.documentElement.lang = lang
-    document.title = t.pageTitle
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t.metaDescription)
   }, [lang])
 
   return (

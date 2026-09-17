@@ -6,6 +6,46 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://inefableia.com/desarrollo-web</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/gestion-ads</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/chatbot-ia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/recepcionista-ia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/automatizacion-crm</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/marketing-automatizado</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/automatizacion-restaurantes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inefableia.com/desarrollo-apps</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://inefableia.com/aviso-legal</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom'
 import { useTranslation } from '../hooks/useTranslation'
 import { firePrefill } from '../lib/prefill'
+import { SERVICE_SLUGS, type ServiceKey } from '../content/serviceSlugs'
 
 const GRADIENTS: Record<string, string> = {
   web: 'linear-gradient(160deg, rgba(47,95,224,.35), rgba(47,95,224,.05))',
@@ -174,7 +176,9 @@ export default function Services() {
                   gap: 8,
                 }}
               >
-                {svc.title}
+                <Link to={SERVICE_SLUGS[svc.key as ServiceKey]} style={{ color: 'inherit' }}>
+                  {svc.title}
+                </Link>
                 {svc.hasPlatformIcons && (
                   <>
                     <InstagramIcon />
